@@ -1,6 +1,6 @@
-# chrome
+# crown
 
-> chrome urls' managemant
+> A chrome url manager, the main features include tab switch and bookmark search
 
 ## Build Setup
 
@@ -14,5 +14,3 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).

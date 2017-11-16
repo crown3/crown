@@ -1,60 +1,120 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Cores Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+    <div id="app">
+        <header>
+            <div class="icon"></div>
+            <input type="text" id="searchInput" autofocus="autofocus" placeholder="switch your tabs or use '>' to search your bookmark">
+        </header>
+        <div class="container">
+            <section class="item">
+                <img class="url-icon" src="./assets/crowns.svg"></img>
+                <aside class="content">
+                    <p class="title">网页标题</p>
+                    <p class="url">https://wwww.crowncj.com</p>
+                </aside>
+            </section>
+            <section class="item">
+                <img class="url-icon" src="./assets/crowns.svg"></img>
+                <aside class="content">
+                    <p class="title">网页标题</p>
+                    <p class="url">https://wwww.crowncj.com</p>
+                </aside>
+            </section>
+        </div>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    data() {
+        return {
+            msg: 'Welcomes to Your Vue.js App'
+        };
+    },
+    computed: {
+
+    },
+    created() {
+
+    },
+    mounted() {
+        //开发优化
+        if (DEV) {
+            document.getElementById('app').classList.add('center')
+        }
+    },
+    methods: {
+
+    },
+    filters: {
+
     }
-  }
-}
+};
 </script>
 
 <style lang="scss">
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+.center {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 1px solid #222;
+}
+body {
+	background: #fff;
+	font-size: 14px;
+	padding: 6px 10px;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+	width: 250px;
+	min-height: 50px;
+	color: #222;
 
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
+	header {
+		display: flex;
+		align-items: center;
+		padding: 10px 10px 5px 10px;
+		border-bottom: 2px solid #393f4d;
+	}
+	.icon {
+		display: inline-block;
+		width: 25px;
+		height: 25px;
+		background-image: url('./assets/crown.svg');
+		background-size: 100%;
+		margin-right: 5px;
+	}
+	#searchInput {
+		border: none;
+		border-radius: 2px;
+		box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
+		outline: none;
+		padding: 0.5em;
+		width: 195px;
+	}
+	.item {
+		display: flex;
+		align-items: center;
+		padding: 10px 10px 5px 10px;
+	}
+	.item + .item {
+		border-top: 1px solid #d4d4dc;
+	}
+	.url-icon {
+		width: 20px;
+		height: 20px;
+		margin-right: 5px;
+	}
+	.content {
+		width: 200px;
+		color: #222;
+		.url {
+			font-size: 12px;
+		}
+	}
 }
 </style>

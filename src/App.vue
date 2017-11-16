@@ -2,51 +2,47 @@
     <div id="app">
         <header>
             <div class="icon"></div>
-            <input type="text" id="searchInput" autofocus="autofocus" placeholder="switch your tabs or use '>' to search your bookmark">
+            <input type="text" id="searchInput" v-model.trim="searchStr">
         </header>
         <div class="container">
-            <section class="item">
-                <img class="url-icon" src="./assets/crowns.svg"></img>
+            <a class="item" :href="item.url" target="_blank" v-for="(item, index) in searchArr" :key="index">
+                <img class="url-icon" :src="'chrome://favicon/' + item.url"></img>
                 <aside class="content">
-                    <p class="title">网页标题</p>
-                    <p class="url">https://wwww.crowncj.com</p>
+                    <p class="title">{{item.title}}</p>
+                    <p class="url">{{item.url}}</p>
                 </aside>
-            </section>
-            <section class="item">
-                <img class="url-icon" src="./assets/crowns.svg"></img>
-                <aside class="content">
-                    <p class="title">网页标题</p>
-                    <p class="url">https://wwww.crowncj.com</p>
-                </aside>
-            </section>
+            </a>
         </div>
     </div>
 </template>
 
 <script>
+import { debounce } from 'lodash'
 export default {
     data() {
         return {
-            msg: 'Welcomes to Your Vue.js App'
+            searchArr: [],
+            searchStr: ''
         };
     },
-    computed: {
-
-    },
-    created() {
-
-    },
     mounted() {
-        //开发优化
+        //开发环境下的优化
         if (DEV) {
             document.getElementById('app').classList.add('center')
         }
     },
-    methods: {
-
+    watch: {
+        searchStr: function () {
+            this.searchBookmarks()
+        }
     },
-    filters: {
-
+    methods: {
+        searchBookmarks: debounce(function () {
+            const _this = this;
+            chrome.bookmarks.search(_this.searchStr, function (data) {
+                _this.searchArr = data.slice(0, 9);
+            })
+        }, 500)
     }
 };
 </script>

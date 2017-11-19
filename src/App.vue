@@ -12,6 +12,13 @@
                     <p class="url">{{item.url}}</p>
                 </aside>
             </a>
+            <a class="item" v-for="(item, index) in allTabs" :key="index" @click="switchTab(item.id)">
+                <img class="url-icon" :src="item.favIconUrl"></img>
+                <aside class="content">
+                    <p class="title">{{item.title}}</p>
+                    <p class="url">{{item.url}}</p>
+                </aside>
+            </a>
         </div>
     </div>
 </template>
@@ -22,7 +29,8 @@ export default {
     data() {
         return {
             searchArr: [],
-            searchStr: ''
+            searchStr: '',
+            allTabs: []
         };
     },
     mounted() {
@@ -30,6 +38,11 @@ export default {
         if (DEV) {
             document.getElementById('app').classList.add('center')
         }
+        const _this = this;
+        this.allTabs = this.getAllTabs();
+        chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
+            _this.getAllTabs();
+        })
     },
     watch: {
         searchStr: function () {
@@ -42,7 +55,19 @@ export default {
             chrome.bookmarks.search(_this.searchStr, function (data) {
                 _this.searchArr = data.slice(0, 9);
             })
-        }, 500)
+        }, 300),
+        getAllTabs: debounce(function () {
+            const _this = this;
+            chrome.tabs.query({
+                windowId: chrome.windows.WINDOW_ID_CURRENT,
+                windowType: "normal"
+            }, function (data) {
+                _this.allTabs = data;
+            })
+        }),
+        switchTab(tabId) {
+            chrome.tabs.update(tabId, { highlighted: true });
+        }
     }
 };
 </script>

@@ -15,15 +15,15 @@
 
 <h5 align="center">目前你可以分别从 `Chrome Web Store` 和 `Github Release` 上下载最新的应用</h5>
 
-## 功能展示
+## 功能展示
 
 <p align="center">
     <img src="./src/assets/md/intro.gif">
 </p>
 
-- 默认 `ctrl + s` 快捷打开本扩展, 可在你的[chrome 扩展程序页面](chrome://extensions/) 找到最下面的 `键盘快捷键` 按钮点击进行修改
-- 在输入框获得焦点下支持以下快捷操作
-    - `tab`: 切换书签搜索和标签页搜索
+- 默认 `ctrl + s` 快捷打开本扩展, 可在你的[chrome 扩展程序页面](chrome://extensions/) 找到最下面的 `键盘快捷键` 按钮点击进行修改
+- 在输入框获得焦点下支持以下快捷操作
+    - `tab`: 切换书签搜索和标签页搜索
     - `up` & `down`: 上下方向键来控制选中项
     - `enter`: 回车直接跳转到相应页面
 
@@ -39,7 +39,7 @@ npm install
 npm run build
 ```
 
-> Tips: 打包之后生成的 `dist` 目录下的文件就是我们最后生成的文件, 你可以直接在 chrome 开发者模式下加载已解压的扩展程序来添加该扩展, 也可以自行去打包生成扩展程序
+> Tips: 打包之后生成的 `dist` 目录下的文件就是我们最后生成的文件, 你可以直接在 chrome 开发者模式下加载已解压的扩展程序来添加该扩展, 也可以自行去打包生成扩展程序
 
 ## License
 
@@ -47,4 +47,4 @@ npm run build
 
 ## 最后
 
-该插件的`icon`基本都来自于 [阿里矢量库](http://www.iconfont.cn/) ,谢谢这些一直在私下默默奉献的人们
+该插件的`icon`基本都来自于 [阿里矢量库](http://www.iconfont.cn/) ,谢谢这些一直在私下默默奉献的人们

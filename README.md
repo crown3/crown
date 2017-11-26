@@ -1,6 +1,7 @@
 # crown
 
-> A chrome url manager, the main features include tab switch and bookmark search
+> Crown: A chrome extension to quickly switch your bookmarks and tabs
+
 
 ## Build Setup
 

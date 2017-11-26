@@ -1,22 +1,27 @@
 <template>
-    <div id="app">
+    <div class="app">
         <header>
             <div class="icon"></div>
-            <input type="text" id="searchInput" v-model.trim="searchStr">
+            <div class="search-box">
+                <div class="tag" @click.stop.prevent="changeSearchOptions">
+                    {{searchOptions[searchOptionsIdx].txt}}
+                </div>
+                <input type="text" id="searchInput" :placeholder="searchOptions[searchOptionsIdx].title" v-model.trim="searchStr" @keydown.tab.stop.prevent="changeSearchOptions" @keydown.up.prevent="switchUp" @keydown.down.prevent="switchDown" @keydown.enter.prevent="selectItem">
+            </div>
         </header>
         <div class="container">
-            <a class="item" :href="item.url" target="_blank" v-for="(item, index) in searchArr" :key="index">
+            <a class="item" v-show="searchOptionsIdx === 0" :class="{active: index === checkedIdx}" :href="item.url" target="_blank" :title="item.title" v-for="(item, index) in searchBookmarksArr" :key="index">
                 <img class="url-icon" :src="'chrome://favicon/' + item.url"></img>
                 <aside class="content">
-                    <p class="title">{{item.title}}</p>
-                    <p class="url">{{item.url}}</p>
+                    <p class="title oneText">{{item.title}}</p>
+                    <p class="url oneText">{{item.url}}</p>
                 </aside>
             </a>
-            <a class="item" v-for="(item, index) in allTabs" :key="index" @click="switchTab(item.id)">
-                <img class="url-icon" :src="item.favIconUrl"></img>
+            <a class="item" v-show="searchOptionsIdx === 1" :class="{active: index === checkedIdx}" :title="item.title" v-for="(item, index) in searchTabsArr" :key="index" @click="switchTab(item.id)">
+                <img class="url-icon" :src="item.favIconUrl | isNullUrl"></img>
                 <aside class="content">
-                    <p class="title">{{item.title}}</p>
-                    <p class="url">{{item.url}}</p>
+                    <p class="title oneText">{{item.title}}</p>
+                    <p class="url oneText">{{item.url}}</p>
                 </aside>
             </a>
         </div>
@@ -28,114 +33,132 @@ import { debounce } from 'lodash'
 export default {
     data() {
         return {
-            searchArr: [],
             searchStr: '',
-            allTabs: []
+            searchBookmarksArr: [],
+            searchTabsArr: [],
+            searchOptions: [
+                { title: 'Search Bookmarks', txt: 'B' },
+                { title: 'Search Tabs', txt: 'T' }
+            ],
+            searchOptionsIdx: 0,
+            checkedIdx: 0
         };
     },
     mounted() {
-        //开发环境下的优化
-        if (DEV) {
-            document.getElementById('app').classList.add('center')
-        }
         const _this = this;
-        this.allTabs = this.getAllTabs();
+        this.searchTabsArr = this.searchTabs();
         chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-            _this.getAllTabs();
+            _this.searchTabs();
         })
     },
     watch: {
         searchStr: function () {
-            this.searchBookmarks()
+            switch (this.searchOptionsIdx) {
+                case 0:
+                    this.searchBookmarks()
+                    break;
+                case 1:
+                    this.searchTabs()
+                    break;
+                default:
+                    break;
+            }
+        }
+    },
+    computed: {
+        searchResultsLen: function () {
+            let len = 0;
+            switch (this.searchOptionsIdx) {
+                case 0:
+                    len = this.searchBookmarksArr.length
+                    break;
+                case 1:
+                    len = this.searchTabsArr.length
+                    break;
+                default:
+                    break;
+            }
+            return len
         }
     },
     methods: {
         searchBookmarks: debounce(function () {
             const _this = this;
             chrome.bookmarks.search(_this.searchStr, function (data) {
-                _this.searchArr = data.slice(0, 9);
+                _this.searchBookmarksArr = data.filter(ele => {
+                    return !ele.dateGroupModified
+                });
             })
         }, 300),
-        getAllTabs: debounce(function () {
+        searchTabs: debounce(function () {
             const _this = this;
             chrome.tabs.query({
                 windowId: chrome.windows.WINDOW_ID_CURRENT,
                 windowType: "normal"
             }, function (data) {
-                _this.allTabs = data;
+                if (!_this.searchStr) {
+                    _this.searchTabsArr = data;
+                } else {
+                    let reg = new RegExp("(" + _this.searchStr + ")", "g")
+                    _this.searchTabsArr = data.filter(ele => {
+                        return reg.test(ele.title) || reg.test(ele.url)
+                    })
+                }
             })
-        }),
+        }, 300),
         switchTab(tabId) {
-            chrome.tabs.update(tabId, { highlighted: true });
+            chrome.tabs.update(tabId, { highlighted: true, active: true });
+        },
+        changeSearchOptions: debounce(function () {
+            if (this.searchOptionsIdx + 1 < this.searchOptions.length) {
+                this.searchOptionsIdx++
+            } else {
+                this.searchOptionsIdx = 0
+            }
+            switch (this.searchOptionsIdx) {
+                case 0:
+                    this.searchBookmarks()
+                    break;
+                case 1:
+                    this.searchTabs()
+                    break;
+                default:
+                    break;
+            }
+            this.checkedIdx = 0;
+        }, 100),
+        switchUp() {
+            if (this.checkedIdx > 0) {
+                this.checkedIdx--;
+                if (this.checkedIdx >= 8) {
+                    this.changeScrollTop()
+                }
+            }
+        },
+        switchDown() {
+            if (this.checkedIdx < this.searchResultsLen - 1) {
+                this.checkedIdx++;
+                if (this.checkedIdx > 8) {
+                    this.changeScrollTop()
+                }
+            }
+        },
+        selectItem() {
+            document.getElementsByClassName('item active')[0].click()
+        },
+        changeScrollTop() {
+            const ele = document.getElementsByClassName('container')[0];
+            ele.scrollTop = (this.checkedIdx - 8) * 54
+        }
+    },
+    filters: {
+        isNullUrl(url) {
+            return (url && url.indexOf('chrome-extension') === -1) ? url : './assets/icon-no.png'
         }
     }
 };
 </script>
 
 <style lang="scss">
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-.center {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	border: 1px solid #222;
-}
-body {
-	background: #fff;
-	font-size: 14px;
-	padding: 6px 10px;
-}
-#app {
-	width: 250px;
-	min-height: 50px;
-	color: #222;
-
-	header {
-		display: flex;
-		align-items: center;
-		padding: 10px 10px 5px 10px;
-		border-bottom: 2px solid #393f4d;
-	}
-	.icon {
-		display: inline-block;
-		width: 25px;
-		height: 25px;
-		background-image: url('./assets/crown.svg');
-		background-size: 100%;
-		margin-right: 5px;
-	}
-	#searchInput {
-		border: none;
-		border-radius: 2px;
-		box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.2);
-		outline: none;
-		padding: 0.5em;
-		width: 195px;
-	}
-	.item {
-		display: flex;
-		align-items: center;
-		padding: 10px 10px 5px 10px;
-	}
-	.item + .item {
-		border-top: 1px solid #d4d4dc;
-	}
-	.url-icon {
-		width: 20px;
-		height: 20px;
-		margin-right: 5px;
-	}
-	.content {
-		width: 200px;
-		color: #222;
-		.url {
-			font-size: 12px;
-		}
-	}
-}
+@import './style.scss';
 </style>

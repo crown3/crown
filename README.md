@@ -15,7 +15,7 @@ A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :al
     <a href="https://github.com/crown3/crown/releases"><img src="./src/assets/md/Github.png"></a>
 </p>
 
-<h5 align="center">Currently you can download the latest apps from `Chrome Web Store` and` Github Release` respectively</h5>
+<h5 align="center">Currently you can download the latest apps from Chrome Web Store and  Github Release</h5>
 
 ## Display
 
@@ -23,11 +23,11 @@ A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :al
     <img src="./src/assets/md/intro.gif">
 </p>
 
-* Default `ctrl + s` shortcut to open this extension , you can find in your [chrome extensions page](chrome://extensions/) the bottom of the keyboard shortcuts button click to modify
+* Default `alt + s` to open this extension , you can find in your `chrome://extensions/` to set it.
 * In the input box under the focus to support the following shortcuts
     - `tab`: Toggle bookmark search and tab search
-    - `up` & `down`: Up and down arrow keys to control the selected item
-    - `enter`: Enter directly jump to the appropriate page
+    - `up` & `down`: control the selected item
+    - `enter`: jump to the appropriate page
 
 ## Build
 

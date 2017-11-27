@@ -15,7 +15,7 @@
     <a href="https://github.com/crown3/crown/releases"><img src="./src/assets/md/Github.png"></a>
 </p>
 
-<h5 align="center">目前你可以分别从 `Chrome Web Store` 和 `Github Release` 上下载最新的应用</h5>
+<h5 align="center">目前你可以分别从 Chrome Web Store 和 Github Release 上下载最新的应用</h5>
 
 ## 功能展示
 
@@ -23,7 +23,7 @@
     <img src="./src/assets/md/intro.gif">
 </p>
 
-* 默认 `ctrl + s` 快捷打开本扩展 , 可在你的[chrome 扩展程序页面](chrome://extensions/) 找到最下面的 `键盘快捷键` 按钮点击进行修改
+* 默认 `alt + s` 快捷打开本扩展 , 可在你的 `chrome://extensions/` 找到最下面的 `键盘快捷键` 按钮点击进行修改
 * 在输入框获得焦点下支持以下快捷操作
 	* `tab`: 切换书签搜索和标签页搜索
 	* `up` & `down`: 上下方向键来控制选中项

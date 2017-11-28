@@ -6,7 +6,7 @@
                 <div class="tag" @click.stop.prevent="changeSearchOptions">
                     {{searchOptions[searchOptionsIdx].txt}}
                 </div>
-                <input type="text" id="searchInput" :placeholder="searchOptions[searchOptionsIdx].title" v-model.trim="searchStr" @keydown.tab.stop.prevent="changeSearchOptions" @keydown.up.prevent="switchUp" @keydown.down.prevent="switchDown" @keydown.enter.prevent="selectItem">
+                <input type="text" id="searchInput" autofocus="autofocus" :placeholder="searchOptions[searchOptionsIdx].title" v-model.trim="searchStr" @keydown.tab.stop.prevent="changeSearchOptions" @keydown.up.prevent="switchUp" @keydown.down.prevent="switchDown" @keydown.enter.prevent="selectItem">
             </div>
         </header>
         <div class="container">

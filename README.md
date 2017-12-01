@@ -6,13 +6,13 @@
 
 A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :alien: :punch:
 
-[中文文档](./README_zh.md) | [English document](./README.md)
+[中文文档](./docs/README_zh.md) | [English document](./README.md)
 
 ## Download :
 
 <p align="center">
-    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img src="./src/assets/md/chrome-icon.png"></a>
-    <a href="https://github.com/crown3/crown/releases"><img src="./src/assets/md/Github.png"></a>
+    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img src="./docs/md-img/chrome-icon.png"></a>
+    <a href="https://github.com/crown3/crown/releases"><img src="./docs/md-img/Github.png"></a>
 </p>
 
 <h5 align="center">Currently you can download the latest apps from Chrome Web Store and  Github Release</h5>
@@ -20,7 +20,7 @@ A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :al
 ## Display
 
 <p align="center">
-    <img src="./src/assets/md/intro.gif">
+    <img src="./docs/md-img/intro.gif">
 </p>
 
 * Default `alt + s` to open this extension , you can find in your `chrome://extensions/` to set it.

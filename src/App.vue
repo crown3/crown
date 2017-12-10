@@ -100,7 +100,7 @@ export default {
                     if (!_this.searchStr) {
                         _this.searchTabsArr = data
                     } else {
-                        let reg = new RegExp('(' + _this.searchStr + ')', 'g')
+                        let reg = new RegExp('(' + _this.searchStr + ')', 'gi')
                         _this.searchTabsArr = data.filter(ele => {
                             return reg.test(ele.title) || reg.test(ele.url)
                         })

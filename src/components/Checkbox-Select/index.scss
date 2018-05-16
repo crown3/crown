@@ -6,8 +6,8 @@
   }
   .checkbox-main {
     position: relative;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border-radius: 3px;
     border: 2px solid #c8ccd4;
     box-sizing: border-box;
@@ -39,7 +39,7 @@
     }
   }
   input:checked {
-    & + .checkbox-main {
+    &+.checkbox-main {
       border-color: #20c2e0;
       svg {
         path {

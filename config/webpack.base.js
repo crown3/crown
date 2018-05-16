@@ -8,6 +8,8 @@ const utils = require('./utils')
 const config = require('./index')
 const vueLoaderConfig = require('./vue-loader.conf')
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -42,7 +44,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-      'lodash-es': 'lodash'
+      'lodash': 'lodash-es',
     }
   },
   module: {
@@ -69,7 +71,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10 * 1024,
-          publicPath: 'chrome-extension://__MSG_@@extension_id__/',
+          publicPath: isProduction ? 'chrome-extension://__MSG_@@extension_id__/' : '',
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }
       },
@@ -78,7 +80,7 @@ module.exports = {
         loader: 'svg-url-loader',
         options: {
           limit: 1 * 1024,
-          publicPath: 'chrome-extension://__MSG_@@extension_id__/',
+          publicPath: isProduction ? 'chrome-extension://__MSG_@@extension_id__/' : '',
           noquotes: true,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
         }

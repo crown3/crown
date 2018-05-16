@@ -1,16 +1,16 @@
 <template>
   <div class="content-container">
     <div class="nav">
-      <p class="versions">版本: <span class="versions-num">2.0.0</span></p>
+      <p class="versions">{{ getI18nMsg('versions') }}: <span class="versions-num">2.0.0</span></p>
       <div class="tabs">
         <div
           :class="{'is-active': activeTab===1}"
           class="tab-item"
-          @click="activeTab=1">设置</div>
+          @click="activeTab=1">{{ getI18nMsg('opt_setting') }}</div>
         <div
           :class="{'is-active': activeTab===2}"
           class="tab-item"
-          @click="activeTab=2">关于</div>
+          @click="activeTab=2">{{ getI18nMsg('opt_about') }}</div>
       </div>
     </div>
 
@@ -28,13 +28,18 @@ import FormSetting from '@/components/FormSetting/index'
 export default {
   components: {
     Content,
-    FormSetting,
+    FormSetting
   },
   data() {
     return {
-      activeTab: 1,
+      activeTab: 1
     }
   },
+  methods: {
+    getI18nMsg(...args) {
+      return chrome.i18n.getMessage(...args)
+    }
+  }
 }
 </script>
 

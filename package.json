@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "async-es": "^2.6.0",
-    "lodash": "^4.17.5",
+    "lodash-es": "^4.17.10",
     "normalize.css": "^8.0.0",
     "vue": "^2.5.2"
   },
@@ -37,7 +37,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "chalk": "^2.0.1",
     "clean-webpack-plugin": "^0.1.18",
-    "copy-webpack-plugin": "^4.0.1",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.0",
     "eslint": "^4.15.0",
     "eslint-config-airbnb-base": "^11.3.0",

@@ -1,6 +1,6 @@
 import chromeAPI from '../api/chrome-api'
 
-function handleItem(item) {
+function handleSelectedItem(item) {
   switch (item.type) {
     case 'bookmark':
       chromeAPI.openNewTab(item.subtitle)
@@ -14,4 +14,4 @@ function handleItem(item) {
   }
 }
 
-export default handleItem
+export default handleSelectedItem

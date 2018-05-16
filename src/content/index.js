@@ -2,7 +2,6 @@ import Vue from 'vue'
 
 import App from '../popup/popup'
 import './content.scss'
-import util from '../util'
 
 Vue.config.productionTip = false
 
@@ -22,11 +21,16 @@ function initCrown() {
 }
 
 chrome.runtime.onMessage.addListener(req => {
-  util.Echo('​req', req)
   // req.action is a JSON which you send
   if (req.type === 'openExtension') {
     // insert crown dom if it doesn't exit
-    if (!document.getElementById('#CrownApp')) initCrown()
-    // TODO: 在网页中打开窗口
+    if (!document.getElementById('CrownApp')) initCrown()
+    else {
+      const crownMack = document.getElementsByClassName('crown-mask')[0]
+      if (crownMack.style.display !== 'block') {
+        crownMack.style.display = 'block'
+        document.getElementsByClassName('input-crown')[0].focus()
+      }
+    }
   }
 })

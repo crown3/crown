@@ -1,0 +1,54 @@
+{
+  "extName": {
+    "message": "Crown",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "A chrome extension to quickly retrieve and switch your bookmarks or tabs!!!",
+    "description": "Extended description"
+  },
+  "versions": {
+    "message": "version",
+    "description": "Extended version number"
+  },
+  "bookmark": {
+    "message": "Bookmarks",
+    "description": ""
+  },
+  "tab": {
+    "message": "Tabs",
+    "description": ""
+  },
+  "opt_setting": {
+    "message": "Setting",
+    "description": ""
+  },
+  "opt_about": {
+    "message": "About",
+    "description": ""
+  },
+  "opt_relatedSettings": {
+    "message": "related setting",
+    "description": ""
+  },
+  "opt_searchByDefault": {
+    "message": "Whether the results of $TYPE$ appear in your default search results ?",
+    "description": "Is it set as part of the default search results",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "bookmarks"
+      }
+    }
+  },
+  "opt_setKeyword": {
+    "message": "The keyword used to search for $TYPE$ is =>",
+    "description": "set the keyword",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "bookmarks"
+      }
+    }
+  }
+}

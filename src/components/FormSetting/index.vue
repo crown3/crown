@@ -1,54 +1,33 @@
 <template>
   <div class="form-setting">
+    <ul class="left-nav">
+      <li class="item">Bookmark</li>
+      <li class="item">Tab</li>
+    </ul>
 
-    <div class="table-row">
-      <div class="row-left">默认搜索</div>
-      <div class="row-right">
-
-        <div
-          v-for="item in setting.itemSetting"
-          :key="item.type"
-          class="row">
-          <div class="input-container">
-            <CheckboxSelect v-model="item.isDefault"/>
-          </div>
-          <div class="text-intro">是否默认搜索<span class="special-text">{{ item.type }}</span>的内容</div>
-        </div>
-
+    <div class="form-content">
+      <div
+        v-for="item in setting.itemSetting"
+        :key="item.type"
+        class="row-container">
+        <h3 class="anchor"># {{ item.type }} {{ getI18nMsg('opt_relatedSettings') }}</h3>
+        <p class="row">
+          <CheckboxSelect v-model="item.isDefault"/>
+          <span>{{ getI18nMsg('opt_searchByDefault',[item.type]) }}</span>
+        </p>
+        <p class="row">
+          <span>{{ getI18nMsg('opt_setKeyword',[item.type]) }}</span>
+          <input
+            v-model="item.keyword"
+            type="text"
+            class="input-modify">
+        </p>
       </div>
     </div>
-
-    <div class="table-row">
-      <div class="row-left">单项设置</div>
-      <div class="row-right">
-
-        <div
-          v-for="item in setting.itemSetting"
-          :key="item.type"
-          class="row">
-          <div class="input-container">
-            <CheckboxOn2Off v-model="item.isDefault"/>
-          </div>
-          <div class="text-intro">
-            <div>是否打开搜索{{ item.type }}的功能</div>
-            <div v-show="item.isDefault">
-              修改搜索关键字?
-              <input
-                v-model="item.keyword"
-                type="text"
-                class="input-modify">
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
   </div>
 </template>
 
 <script>
-import CheckboxOn2Off from '../Checkbox-On2Off/index'
 import CheckboxSelect from '../Checkbox-Select/index'
 
 import chromeAPI from '../../api/chrome-api'
@@ -57,21 +36,22 @@ import defaultSetting from '../../background/default-setting'
 
 export default {
   components: {
-    CheckboxOn2Off,
-    CheckboxSelect,
+    CheckboxSelect
   },
   data() {
     return {
-      setting: defaultSetting,
+      setting: defaultSetting
     }
   },
   watch: {
     setting: {
       handler(val) {
-        chromeAPI.setConfig(val)
+        chromeAPI.setConfig(val).then(status => {
+          console.log(status)
+        })
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   created() {
     chromeAPI
@@ -83,6 +63,11 @@ export default {
         throw new Error('get setting error in options')
       })
   },
+  methods: {
+    getI18nMsg(...args) {
+      return chrome.i18n.getMessage(...args)
+    }
+  }
 }
 </script>
 

@@ -1,71 +1,53 @@
-import async from 'async-es'
-import _ from "lodash"
+import _ from "lodash-es"
 
 const chrome = window.chrome
 
-/**
- * search your bookmarks
- * @param {string} str
- * @return {Array}
- */
-function queryBMItem(sItem, callback) {
-  // filter some useless bookmarks
-  chrome.bookmarks.search(sItem, rep => callback(null, rep))
-}
-
 function queryBM(arr) {
-  // 并发查询多个搜索结果 然后去重 + 去除无效数据
-  return new Promise((resolve, reject) => {
-    async.concat(arr, queryBMItem, (err, results) => {
-      if (err) {
-        reject(err.message)
-      } else {
-        const temp = []
-        _.uniqBy(results, 'id').forEach(item => {
-          if (!item.dateGroupModified &&
-            arr.every(item1 =>
-              new RegExp(`${item1}`, 'gi').test(`${item.url} ${item.title}`))) {
-            temp.push({
+  // 多个查询只需要在第一编查询出来的结果上进行去重即可, 不必再去查询第二遍
+  return new Promise(resolve => {
+    if (!arr.length) resolve([])
+    else {
+      chrome.bookmarks.search(arr[0], rep => {
+        const tmp = []
+        for (let index = 0; index < rep.length; index += 1) {
+          const item = rep[index]
+          // 当不是多个单词查询时, isRight 默认为true, 否则才会进行的后面的多个单词匹配
+          const isRight = arr.length === 1 || arr.every(item1 => new RegExp(`${item1}`, 'gi').test(`${item.url} ${item.title}`))
+          // 去重 + 去除无效数据
+          if (!item.dateGroupModified && isRight) {
+            tmp.push({
               type: 'bookmark',
               title: item.title ? item.title : item.url, // title 不能为空
               subtitle: item.url,
             })
           }
-        })
-        console.log('​queryBM -> results', temp)
-        resolve(temp)
-      }
-    })
+        }
+        resolve(tmp)
+      })
+    }
   })
 }
 
-/**
- * search your tabs in current win
- * @param {string} str
- * @return {Array}
- */
-function queryTabItem(str, callback) {
-  // use Regex to query tab what we need in current window
-  chrome.tabs.query({
-      windowId: chrome.windows.WINDOW_ID_CURRENT,
-      windowType: 'normal'
-    },
-    rep => callback(null, rep)
-  )
-}
-
 function queryTab(arr) {
-  // 并发查询多个搜索结果 然后去重 + 去除无效数据
-  return new Promise((resolve, reject) => {
-    async.concat(arr, queryTabItem, (err, results) => {
-      if (err) {
-        reject(err.message)
-      } else {
-        const temp = []
-        _.uniqBy(results, 'id').forEach(item => {
-          if (arr.every(item1 =>
-              new RegExp(`${item1}`, 'gi').test(`${item.url} ${item.title}`))) {
-            temp.push({
+  // 同上面的 queryBM 方法
+  return new Promise(resolve => {
+    // tab 检索时默认出现所有的tab页
+    if (arr.length === 0) arr.push('')
+    chrome.tabs.query({
+        windowId: chrome.windows.WINDOW_ID_CURRENT,
+        windowType: 'normal'
+      },
+      rep => {
+        const tmp = []
+        for (let index = 0; index < rep.length; index += 1) {
+          const item = rep[index]
+          /**
+           * length === 0: 默认出现所有所有 tab 页
+           * length === 1 : 不需要进行后面的多个单词匹配
+           */
+          const isRight = arr.length < 2 || arr.every(item1 => new RegExp(`${item1}`, 'gi').test(`${item.url} ${item.title}`))
+          if (isRight) {
+            tmp.push({
               type: 'tab',
               title: item.title,
               subtitle: item.url,
@@ -74,11 +56,10 @@ function queryTab(arr) {
               id: item.id,
             })
           }
-        })
-        console.log('​queryTab -> results', temp)
-        resolve(temp)
+        }
+        resolve(tmp)
       }
-    })
+    )
   })
 }
 
@@ -146,6 +127,7 @@ function findActiveTab() {
       active: true,
       currentWindow: true
     }, tabs => {
+      console.log('​findActiveTab -> tabs', tabs)
       resolve(tabs[0])
     })
   })
@@ -184,5 +166,4 @@ export default {
   setConfig,
   updateTabStatus,
   openNewTab,
-
 }

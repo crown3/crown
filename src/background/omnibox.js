@@ -1,7 +1,7 @@
-import _ from 'lodash'
+import _ from 'lodash-es'
 
-import getSearchData from './filter-data'
-import handleItem from './handle-selected-item'
+import filterSearchData from './filter-search-data'
+import handleSelectedItem from './handle-selected-item'
 
 
 // 缓存搜索结果
@@ -33,7 +33,7 @@ function setSuggestion(decs) {
 function hanldeStr(str, suggest) {
   // 搜索文字为空时return
   if (!str) return
-  getSearchData(str).then(temp => {
+  filterSearchData(str).then(temp => {
     // chrome address bar lists.length <= 5
     const results = []
     const regex = new RegExp(`${str.replace(/\s+/g, '|')}`, 'gi')
@@ -75,7 +75,7 @@ function bindOmniboxEvent() {
      * disposition: <Enum> "currentTab", "newForegroundTab", or "newBackgroundTab".  This is the recommended context to display results. For example, if the omnibox command is to navigate to a certain URL, a disposition of 'newForegroundTab' means the navigation should take place in a new selected tab.
      */
     const index = +args[0].split('@index=').slice(-1)
-    handleItem(SearchResults[index - 1])
+    handleSelectedItem(SearchResults[index - 1])
   }))
 }
 

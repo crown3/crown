@@ -29,6 +29,9 @@ $designWidth: 700;
     background: #ec5b2f;
     border-radius: 1px;
   }
+  &.is-circular {
+    border-radius: 10px;
+  }
   .header-search {
     display: flex;
     height: 75px;

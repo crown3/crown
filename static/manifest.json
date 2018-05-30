@@ -28,7 +28,8 @@
     "js": ["./js/runtime.js", "./js/vendor.js", "./js/content.js"]
   }],
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
-  "description": "A chrome extension to quickly retrieve and switch your bookmarks or tabs!!!",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
   "homepage_url": "https://github.com/crown3/crown",
   "icons": {
     "16": "./crown.png",

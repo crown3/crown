@@ -1,7 +1,7 @@
 import Vue from 'vue'
 
 import App from '../popup/popup'
-import './content.scss'
+import './content.styl'
 
 Vue.config.productionTip = false
 

@@ -34,18 +34,18 @@ export default {
   props: {
     str: {
       type: String,
-      default: '',
+      default: ''
     },
     isWebpage: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
       searchResults: [],
       activeIndex: 0,
-      activeIntervalStartIdx: 0, // active 显示出来的区间的左侧
+      activeIntervalStartIdx: 0 // active 显示出来的区间的左侧
     }
   },
   watch: {
@@ -62,9 +62,9 @@ export default {
         if (newVal > this.activeIntervalStartIdx + 8) this.activeIntervalStartIdx += 1
         // 在向上移动
         if (newVal < this.activeIntervalStartIdx) this.activeIntervalStartIdx -= 1
-      }
-      // 特殊情况下的 activeIndex 定位, 例如指定初始 activeIndex , 或者操作键盘移动时超过了上下边界时的情况
-      else if (newVal < 9) this.activeIntervalStartIdx = 0
+      } else if (newVal < 9)
+        // 特殊情况下的 activeIndex 定位, 例如指定初始 activeIndex , 或者操作键盘移动时超过了上下边界时的情况
+        this.activeIntervalStartIdx = 0
       else if (newVal < this.searchResults.length - 9) this.activeIntervalStartIdx = newVal - 9
       else if (newVal < this.searchResults.length)
         this.activeIntervalStartIdx = this.searchResults.length - 9
@@ -73,7 +73,7 @@ export default {
       this.$nextTick(() => {
         this.$refs.lists.scrollTop = newVal * 49
       })
-    },
+    }
   },
   created() {
     chromeAPI.listenMsg(rep => {
@@ -94,7 +94,7 @@ export default {
     searchEvent: _.debounce(function sendQueryReq() {
       chromeAPI.sendMsg({
         action: this.isWebpage ? 'WebQueryReq' : 'QueryReq',
-        searchStr: this.str,
+        searchStr: this.str
       })
     }, 300),
     changeMatchTextColor(str) {
@@ -109,17 +109,17 @@ export default {
       } else {
         chromeAPI.sendMsg({
           action: 'Selected',
-          item,
+          item
         })
       }
     },
     keydownEnter() {
       this.selectItem(this.searchResults[this.activeIndex])
-    },
-  },
+    }
+  }
 }
 </script>
 
-<style lang="scss">
-@import './search-list.scss';
+<style lang="styl">
+@import './search-list.styl';
 </style>

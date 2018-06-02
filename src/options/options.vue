@@ -43,6 +43,6 @@ export default {
 }
 </script>
 
-<style lang="scss">
-@import './options.scss';
+<style lang="styl">
+@import './options.styl';
 </style>

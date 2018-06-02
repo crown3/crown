@@ -1,3 +1,0 @@
-@function calcPx($px) {
-  @return $px * 320 / $designWidth/20 + px;
-}

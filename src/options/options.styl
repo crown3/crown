@@ -1,0 +1,56 @@
+.content-container
+  display: flex
+  flex-direction: column
+  min-width: 610px
+  height: 400px
+  color: #82919d
+
+.has-padding
+  padding: 12px 17px
+
+.text-active
+  color: #fff
+
+.nav
+  flex-shrink: 0
+  padding: 0 7px
+  height: 63px
+  background: #3d454c
+
+.versions
+  margin: 12px 0 8px 17px
+  line-height: 17px
+
+.versions-num
+  margin-left: 5px
+  color: #E4EBF0
+
+.tabs
+  display: flex
+  height: 26px
+
+.tab-item
+  position: relative
+  padding: 0 17px
+  cursor: pointer
+
+  &.is-active
+    color: #fff
+
+    &::after
+      position: absolute
+      bottom: 0
+      left: 50%
+      display: block
+      margin-left: -8px
+      width: 0
+      height: 0
+      border-right: 8px solid transparent
+      border-bottom: 8px solid #30373d
+      border-left: 8px solid transparent
+      content: ''
+
+.content
+  flex: 1
+  overflow: auto
+  background: #30373d

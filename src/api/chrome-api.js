@@ -127,7 +127,6 @@ function findActiveTab() {
       active: true,
       currentWindow: true
     }, tabs => {
-      console.log('​findActiveTab -> tabs', tabs)
       resolve(tabs[0])
     })
   })

@@ -1,0 +1,50 @@
+// @import '../scss/common.scss';
+#CrownApp
+  display: flex
+  flex-direction: column
+  padding: 0 11px
+  background: #fff
+  font-family: Helvetica, Arial, sans-serif
+
+  *
+    font-family: Helvetica, Arial, sans-serif
+
+  ::-webkit-scrollbar
+    width: 2px
+    background-color: #fff
+
+  ::-webkit-scrollbar-track-piece
+    border-radius: 1px
+    background-color: #fff
+
+  :-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment
+    display: block
+    background-color: #fff
+
+  ::-webkit-scrollbar-thumb:vertical
+    width: 2px
+    height: 86px
+    border-radius: 1px
+    background: #ec5b2f
+
+  &.is-circular
+    border-radius: 10px
+
+  .header-search
+    display: flex
+    align-items: center
+    height: 75px
+
+  .logo-crown
+    width: 49px
+    height: 45px
+    background: url('../assets/crown.svg') center / 34px no-repeat
+
+  .input-crown
+    flex: 1
+    padding: 0
+    height: 45px
+    outline: none
+    border: none
+    font-weight: 100
+    font-size: 33px

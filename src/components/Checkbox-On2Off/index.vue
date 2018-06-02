@@ -26,12 +26,12 @@ export default {
   props: {
     value: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 }
 </script>
 
-<style lang="scss">
-@import './index.scss';
+<style lang="styl">
+@import './index.styl';
 </style>

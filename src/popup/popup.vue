@@ -24,8 +24,8 @@
   </div>
 </template>
 
-<style lang="scss">
-@import './popup.scss';
+<style lang="styl">
+@import './popup.styl';
 </style>
 
 <script>
@@ -33,12 +33,12 @@ import SearchList from '@/components/SearchList'
 
 export default {
   components: {
-    SearchList,
+    SearchList
   },
   data() {
     return {
       searchStr: '',
-      isWebpage: !!document.getElementsByClassName('crown-mask').length, // 是否在网页中
+      isWebpage: !!document.getElementsByClassName('crown-mask').length // 是否在网页中
     }
   },
   mounted() {
@@ -53,7 +53,7 @@ export default {
             crownMask.style.display = 'none'
           }
         },
-        false,
+        false
       )
     }
   },
@@ -64,13 +64,13 @@ export default {
         case 'up':
           child0.activeIndex = this.handleLoopArrIndex(
             child0.activeIndex - 1,
-            child0.searchResults.length,
+            child0.searchResults.length
           )
           break
         case 'down':
           child0.activeIndex = this.handleLoopArrIndex(
             child0.activeIndex + 1,
-            child0.searchResults.length,
+            child0.searchResults.length
           )
           break
         case 'enter':
@@ -96,7 +96,7 @@ export default {
         return idx % len
       }
       return idx
-    },
-  },
+    }
+  }
 }
 </script>

@@ -1,0 +1,54 @@
+.checkbox-select
+  display: inline-block
+  cursor: pointer
+
+  .invisible
+    display: none
+
+  .checkbox-main
+    position: relative
+    float: left
+    box-sizing: border-box
+    width: 16px
+    height: 16px
+    border: 2px solid #c8ccd4
+    border-radius: 3px
+
+    svg
+      position: absolute
+      top: -2px
+      left: -2px
+
+      path
+        transition: all .6s ease
+        fill: none
+        stroke: #20c2e0
+        stroke-width: 2
+        stroke-linecap: round
+        stroke-linejoin: round
+        stroke-dasharray: 71px
+        stroke-dashoffset: 71px
+
+      polyline
+        transition: all .3s ease
+        fill: none
+        stroke: #fff
+        stroke-width: 2
+        stroke-linecap: round
+        stroke-linejoin: round
+        stroke-dasharray: 18px
+        stroke-dashoffset: 18px
+
+  input:checked
+    &+.checkbox-main
+      border-color: #20c2e0
+
+      svg
+        path
+          fill: #20c2e0
+
+        polyline
+          stroke-dashoffset: 0
+
+  &:hover .checkbox-main svg path
+    stroke-dashoffset: 0

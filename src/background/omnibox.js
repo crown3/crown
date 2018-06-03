@@ -2,20 +2,10 @@ import _ from 'lodash-es'
 
 import filterSearchData from './filter-search-data'
 import handleSelectedItem from './handle-selected-item'
-
+import util from '../util/index'
 
 // 缓存搜索结果
 let SearchResults = []
-
-/**
- * https://stackoverflow.com/questions/35802159/chrome-omnibox-special-characters-throw-error
- * handle a error about (omnibox description xmlParseEntityRef: no name)
- */
-function encodeXml(s) {
-  const dom = document.createElement('div')
-  dom.textContent = s
-  return dom.innerHTML
-}
 
 function setSuggestion(decs) {
   /**
@@ -44,7 +34,7 @@ function hanldeStr(str, suggest) {
       if (item.type !== 'keyword') {
         results.push({
           content: `${item.title} @index=${results.length+1}`,
-          description: `<match>${item.type}</match>: ${`${encodeXml(item.title)} - <url>${encodeXml(item.subtitle)}</url>`.replace(regex, '<match>$&</match>')}`
+          description: `<match>${item.type}</match>: ${`${util.encodeXml(item.title)} - <url>${util.encodeXml(item.subtitle)}</url>`.replace(regex, '<match>$&</match>')}`
         })
 
         SearchResults.push(item)

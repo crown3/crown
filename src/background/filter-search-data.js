@@ -1,13 +1,14 @@
 import async from "async-es"
 
 import chromeAPI from '../api/chrome-api'
+import util from '../util/index'
 
-let setting
+let setting = {}
 
 chromeAPI
   .getConfig()
-  .then(oSetting => {
-    setting = oSetting
+  .then(rep => {
+    setting = rep
   })
   .catch(() => {
     throw new Error('get setting error in filter-data.js')
@@ -18,17 +19,16 @@ chrome.storage.onChanged.addListener(changes => {
   if (changes.crown) setting = JSON.parse(changes.crown.newValue)
 })
 
-// 从配置中检索相关关键字
+// 匹配相关关键字列表
 function searchKeyword(arr) {
   return new Promise(resolve => {
     const temp = []
-    setting.itemSetting.forEach(item => {
-      if (arr.every(item1 =>
-          new RegExp(`${item1}`, 'gi').test(`${item.type} ${item.keyword}`))) {
+    Object.values(setting.itemSetting).forEach(item => {
+      if (util.isEachEligible(arr, `${item.desc} ${item.keyword}`)) {
         temp.push({
           type: 'keyword',
-          title: `Search ${item.type}`,
-          subtitle: `Search ${item.type} for "..."`,
+          title: `Search ${item.desc}`,
+          subtitle: `Search ${item.desc} for "..."`,
           keyword: item.keyword
         })
       }
@@ -40,23 +40,21 @@ function searchKeyword(arr) {
 // 获取需要检索的队列数组
 function filterKeyword(strArr) {
   let tmp = []
-  for (let idx = 0; idx < setting.itemSetting.length; idx += 1) {
-    const item = setting.itemSetting[idx]
-    if (item.isSearch) {
-      if (item.keyword === strArr[0]) {
-        // 搜索单个子列
-        tmp = [{
-          type: item.type,
-          strArr: strArr.slice(1)
-        }]
-        break
-      } else if (item.isDefault)
-        tmp.push({
-          type: item.type,
-          strArr
-        })
-    }
-  }
+  Object.values(setting.itemSetting).some(item => {
+    if (item.keyword === strArr[0]) {
+      // 搜索单个子列
+      tmp = [{
+        type: item.type,
+        strArr: strArr.slice(1)
+      }]
+      return true
+    } else if (item.isDefault)
+      tmp.push({
+        type: item.type,
+        strArr
+      })
+    return false
+  })
   // 不管是默认搜索还是单项的搜索, 都要出现 keyowrd 类别的提示(如果有对应的话)
   return [{
     type: 'keyword',
@@ -75,6 +73,9 @@ function searchFromType(item, callback) {
       break
     case 'tab':
       chromeAPI.queryTab(item.strArr).then(tmp => callback(null, tmp))
+      break
+    case 'closedTab':
+      chromeAPI.queryRecentLyClosed(item.strArr).then(tmp => callback(null, tmp))
       break
 
     default:

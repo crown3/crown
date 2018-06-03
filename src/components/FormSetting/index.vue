@@ -46,9 +46,7 @@ export default {
   watch: {
     setting: {
       handler(val) {
-        chromeAPI.setConfig(val).then(status => {
-          console.log(status)
-        })
+        chromeAPI.setConfig(val)
       },
       deep: true
     }

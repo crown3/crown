@@ -46,7 +46,7 @@
   "omnibox": {
     "keyword": "c"
   },
-  "permissions": ["bookmarks", "chrome://favicon/", "tabs", "storage", "<all_urls>"],
+  "permissions": ["bookmarks", "sessions", "tabs", "storage", "<all_urls>"],
   "version": "2.0.0",
   "web_accessible_resources": [
     "img/*"

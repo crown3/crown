@@ -8,6 +8,9 @@ function handleSelectedItem(item) {
     case 'tab':
       chromeAPI.updateTabStatus(item.id)
       break
+    case 'recentlyClosed':
+      chromeAPI.restoreRecentTab(item.id)
+      break
 
     default:
       break

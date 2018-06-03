@@ -153,6 +153,43 @@ function listenMsg(callback) {
   chrome.runtime.onMessage.addListener(callback)
 }
 
+function queryRecentLyClosed(arr) {
+  return new Promise(resolve => {
+    if (arr.length === 0) arr.push('')
+    chrome.sessions.getRecentlyClosed({
+      maxResults: 5
+    }, (rep) => {
+      const tmp = []
+      for (let index = 0; index < rep.length; index += 1) {
+        const item = rep[index].tab
+        if (item) {
+          /**
+           * length === 0: 默认出现所有所有 最近关闭的标签页
+           * length === 1 : 不需要进行后面的多个单词匹配
+           */
+          const isRight = arr.length < 2 || arr.every(item1 => new RegExp(`${item1}`, 'gi').test(`${item.url} ${item.title}`))
+          if (isRight) {
+            tmp.push({
+              type: 'recentlyClosed',
+              title: item.title,
+              subtitle: item.url,
+
+              id: item.sessionId,
+            })
+          }
+        }
+      }
+      resolve(tmp)
+    })
+
+  })
+
+}
+
+function restoreRecentTab(sessionId) {
+  chrome.sessions.restore(sessionId)
+}
+
 export default {
   findActiveTab,
   getConfig,
@@ -165,4 +202,6 @@ export default {
   setConfig,
   updateTabStatus,
   openNewTab,
+  queryRecentLyClosed,
+  restoreRecentTab
 }

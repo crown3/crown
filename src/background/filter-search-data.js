@@ -42,21 +42,20 @@ function filterKeyword(strArr) {
   let tmp = []
   for (let idx = 0; idx < setting.itemSetting.length; idx += 1) {
     const item = setting.itemSetting[idx]
-    if (item.isSearch) {
-      if (item.keyword === strArr[0]) {
-        // 搜索单个子列
-        tmp = [{
-          type: item.type,
-          strArr: strArr.slice(1)
-        }]
-        break
-      } else if (item.isDefault)
-        tmp.push({
-          type: item.type,
-          strArr
-        })
-    }
+    if (item.keyword === strArr[0]) {
+      // 搜索单个子列
+      tmp = [{
+        type: item.type,
+        strArr: strArr.slice(1)
+      }]
+      break
+    } else if (item.isDefault)
+      tmp.push({
+        type: item.type,
+        strArr
+      })
   }
+  console.log(tmp)
   // 不管是默认搜索还是单项的搜索, 都要出现 keyowrd 类别的提示(如果有对应的话)
   return [{
     type: 'keyword',
@@ -75,6 +74,9 @@ function searchFromType(item, callback) {
       break
     case 'tab':
       chromeAPI.queryTab(item.strArr).then(tmp => callback(null, tmp))
+      break
+    case 'recentlyClosed':
+      chromeAPI.queryRecentLyClosed(item.strArr).then(tmp => callback(null, tmp))
       break
 
     default:

@@ -9,8 +9,6 @@ import handleSelectedItem from './handle-selected-item'
 
 import util from '../util'
 
-chromeAPI.getConfig()
-
 // init extension setting if
 chromeAPI
   .getConfig()

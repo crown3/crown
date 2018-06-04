@@ -31,9 +31,6 @@ function queryBM(arr) {
 function queryTab(arr) {
   // 同上面的 queryBM 方法
   return new Promise(resolve => {
-    const len = arr.length
-    // tab 检索时默认出现所有的tab页
-    if (len === 0) arr.push('')
     chrome.tabs.query({
         windowId: chrome.windows.WINDOW_ID_CURRENT,
         windowType: 'normal'
@@ -42,11 +39,8 @@ function queryTab(arr) {
         const tmp = []
         for (let index = 0; index < rep.length; index += 1) {
           const item = rep[index]
-          /**
-           * length === 0: 默认出现所有所有 tab 页
-           * length === 1 : 不需要进行后面的多个单词匹配
-           */
-          if (len < 2 || util.isEachEligible(arr, `${item.url} ${item.title}`)) {
+          // length === 0: 默认出现所有所有 tab 页
+          if (arr.length === 0 || util.isEachEligible(arr, `${item.url} ${item.title}`)) {
             tmp.push({
               type: 'tab',
               title: item.title,
@@ -148,8 +142,6 @@ function listenMsg(callback) {
 
 function queryRecentLyClosed(arr) {
   return new Promise(resolve => {
-    const len = arr.length
-    if (len === 0) arr.push('')
     chrome.sessions.getRecentlyClosed({
       maxResults: 25
     }, (rep) => {
@@ -162,7 +154,7 @@ function queryRecentLyClosed(arr) {
            * length === 0: 默认出现所有所有 最近关闭的标签页
            * length === 1 : 不需要进行后面的多个单词匹配
            */
-          if (len < 2 || util.isEachEligible(arr, `${item.url} ${item.title}`)) {
+          if (arr.length === 0 || util.isEachEligible(arr, `${item.url} ${item.title}`)) {
             tmp.push({
               type: 'closedTab',
               title: item.title,

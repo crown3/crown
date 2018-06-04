@@ -40,17 +40,17 @@ function searchKeyword(arr) {
 // 获取需要检索的队列数组
 function filterKeyword(strArr) {
   let tmp = []
-  Object.values(setting.itemSetting).some(item => {
-    if (item.keyword === strArr[0]) {
+  Object.entries(setting.itemSetting).some(([key, value]) => {
+    if (value.keyword === strArr[0]) {
       // 搜索单个子列
       tmp = [{
-        type: item.type,
+        type: key,
         strArr: strArr.slice(1)
       }]
       return true
-    } else if (item.isDefault)
+    } else if (value.isDefault)
       tmp.push({
-        type: item.type,
+        type: key,
         strArr
       })
     return false

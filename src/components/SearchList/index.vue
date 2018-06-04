@@ -9,7 +9,7 @@
       class="item"
       @click="selectItem(item)">
       <div
-        :class="item.type"
+        :class="getItemClass(item.type)"
         class="icon" />
 
       <div class="text-box">
@@ -115,6 +115,15 @@ export default {
     },
     keydownEnter() {
       this.selectItem(this.searchResults[this.activeIndex])
+    },
+    getItemClass(type) {
+      switch (type) {
+        case 'closedTab':
+          return 'recently-closed'
+
+        default:
+          return type
+      }
     }
   }
 }

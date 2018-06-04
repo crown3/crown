@@ -6,21 +6,42 @@
     </ul>
 
     <div class="form-content">
-      <div
-        v-for="item in setting.itemSetting"
-        :key="item.type"
-        class="row-container">
-        <h3 class="anchor"># {{ item.type }} {{ getI18nMsg('opt_relatedSettings') }}</h3>
+      <!-- Bookmark setting -->
+      <div class="row-container">
+        <h3 class="anchor"># {{ getI18nMsg('bookmark') }} {{ getI18nMsg('opt_relatedSettings') }}</h3>
         <p class="row">
-          <CheckboxSelect v-model="item.isDefault"/>
-          <span>{{ getI18nMsg('opt_searchByDefault',[item.type]) }}</span>
+          <CheckboxSelect v-model="setting.itemSetting.bookmark.isDefault"/>
+          <span>{{ getI18nMsg('opt_searchByDefault',[getI18nMsg('bookmark')]) }}</span>
         </p>
         <p class="row">
-          <span>{{ getI18nMsg('opt_setKeyword',[item.type]) }}</span>
           <input
-            v-model="item.keyword"
+            v-model="setting.itemSetting.bookmark.keyword"
             type="text"
             class="input-modify">
+          <span>{{ getI18nMsg('opt_setKeyword',[getI18nMsg('bookmark')]) }}</span>
+        </p>
+      </div>
+
+      <!-- Tab setting -->
+      <div class="row-container">
+        <h3 class="anchor"># {{ getI18nMsg('tab') }} {{ getI18nMsg('opt_relatedSettings') }}</h3>
+        <p class="row">
+          <CheckboxSelect v-model="setting.itemSetting.tab.isDefault"/>
+          <span>{{ getI18nMsg('opt_searchByDefault',[getI18nMsg('tab')]) }}</span>
+        </p>
+        <p class="row">
+          <input
+            v-model="setting.itemSetting.tab.keyword"
+            type="text"
+            class="input-modify">
+          <span>{{ getI18nMsg('opt_setKeyword',[getI18nMsg('tab')]) }}</span>
+        </p>
+        <p class="row">
+          <input
+            v-model="setting.itemSetting.closedTab.keyword"
+            type="text"
+            class="input-modify">
+          <span>{{ getI18nMsg('opt_setKeyword',[getI18nMsg('closedTab')]) }}</span>
         </p>
       </div>
     </div>

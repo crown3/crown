@@ -10,6 +10,27 @@ function Echo(...args) {
   }
 }
 
+/**
+ * https://stackoverflow.com/questions/35802159/chrome-omnibox-special-characters-throw-error
+ * handle a error about (omnibox description xmlParseEntityRef: no name)
+ */
+function encodeXml(str) {
+  const dom = document.createElement('div')
+  dom.textContent = str
+  return dom.innerHTML
+}
+
+/**
+ * Whether each is eligible
+ * @param {Array} arr
+ * @param {String} testedStr
+ */
+function isEachEligible(arr, testedStr) {
+  return arr.every(item => new RegExp(`${item}`, 'gi').test(testedStr))
+}
+
 export default {
-  Echo
+  Echo,
+  encodeXml,
+  isEachEligible
 }

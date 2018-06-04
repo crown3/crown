@@ -13,19 +13,18 @@ import util from '../util'
 chromeAPI
   .getConfig()
   .then(data => util.Echo('init getConfig', data))
-  .catch(error => {
-    util.Echo('set config', error)
-    chromeAPI.setConfig(defaultSetting).then(status => {
-      console.log(status)
-    })
+  .catch(() => {
+    chromeAPI.setConfig(defaultSetting)
   })
 
-chromeAPI.listenCommand(async command => {
-  // find current tab, then send a message to show(or insert) extension dom
+chromeAPI.listenCommand(command => {
+  // custom command
   if (command === 'open-in-current-page') {
-    const oTab = await chromeAPI.findActiveTab()
-    chromeAPI.sendMsgInTab(oTab.id, {
-      type: 'openExtension'
+    // find current tab, then send a message to show(or insert) extension dom
+    chromeAPI.findActiveTab().then(oTab => {
+      chromeAPI.sendMsgInTab(oTab.id, {
+        type: 'openExtension'
+      })
     })
   }
 })

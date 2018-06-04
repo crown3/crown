@@ -19,6 +19,10 @@
     "message": "Tabs",
     "description": ""
   },
+  "closedTab": {
+    "message": "Recently Closed Tabs",
+    "description": ""
+  },
   "opt_setting": {
     "message": "Setting",
     "description": ""
@@ -42,7 +46,7 @@
     }
   },
   "opt_setKeyword": {
-    "message": "The keyword used to search for $TYPE$ is =>",
+    "message": "The keyword used to search for $TYPE$",
     "description": "set the keyword",
     "placeholders": {
       "type": {

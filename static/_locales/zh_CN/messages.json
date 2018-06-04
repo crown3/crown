@@ -19,6 +19,10 @@
     "message": "标签页",
     "description": ""
   },
+  "closedTab": {
+    "message": "最近关闭的标签页",
+    "description": ""
+  },
   "opt_setting": {
     "message": "设置",
     "description": ""
@@ -42,7 +46,7 @@
     }
   },
   "opt_setKeyword": {
-    "message": "搜索 $TYPE$ 的关键字 =>",
+    "message": "搜索 $TYPE$ 的关键字",
     "description": "关键字设置",
     "placeholders": {
       "type": {

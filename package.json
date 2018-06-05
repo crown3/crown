@@ -15,12 +15,14 @@
     "lint": "eslint --ext .js,.vue src",
     "prebuild": "npm run lint --fix",
     "build": "node config/build.js",
-    "analyze": "npm_config_report=true node config/build.js"
+    "analyze": "npm_config_report=true node config/build.js",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "dependencies": {
     "async-es": "^2.6.0",
     "lodash-es": "^4.17.10",
-    "vue": "^2.5.2"
+    "vue": "^2.5.16"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -69,7 +71,8 @@
     "url-loader": "^0.5.8",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "^2.5.16",
+    "vuepress": "^0.10.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-chrome-extension-reloader": "^0.6.5",

@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/img/crown.svg"  width="100">
+    <img :src="$withBase('/img/crown.svg')"  width="100">
 </p>
 
 <h2 align="center">Crown</h2>
@@ -9,8 +9,8 @@ A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :al
 ## Download :
 
 <p align="center">
-    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img src="/img/chrome-icon.png"></a>
-    <a href="https://github.com/crown3/crown/releases"><img src="/img/Github.png"></a>
+    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img :src="$withBase('/img/chrome-icon.png')"></a>
+    <a href="https://github.com/crown3/crown/releases"><img :src="$withBase('/img/Github.png')"></a>
 </p>
 
 <h5 align="center">Currently you can download the latest apps from Chrome Web Store and  Github Release</h5>
@@ -18,7 +18,7 @@ A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :al
 ## Display
 
 <p align="center">
-    <img src="/img/intro.gif">
+    <img :src="$withBase('/img/intro.gif')">
 </p>
 
 * Default `alt + s` to open this extension , you can find in your `chrome://extensions/` to set it.

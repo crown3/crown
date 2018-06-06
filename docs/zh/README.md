@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="/img/crown.svg"  width="100">
+    <img :src="$withBase('/img/crown.svg')"  width="100">
 </p>
 
 <h2 align="center">Crown</h2>
@@ -10,8 +10,8 @@
 ## 下载地址 :
 
 <p align="center">
-    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img src="/img/chrome-icon.png"></a>
-    <a href="https://github.com/crown3/crown/releases"><img src="/img/Github.png"></a>
+    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img :src="$withBase('/img/chrome-icon.png')"></a>
+    <a href="https://github.com/crown3/crown/releases"><img :src="$withBase('/img/Github.png')"></a>
 </p>
 
 <h5 align="center">目前你可以分别从 Chrome Web Store 和 Github Release 上下载最新的应用</h5>
@@ -19,7 +19,7 @@
 ## 功能展示
 
 <p align="center">
-    <img src="/img/intro.gif">
+    <img :src="$withBase('/img/intro.gif')">
 </p>
 
 * 默认 `alt + s` 快捷打开本扩展 , 可在你的 `chrome://extensions/` 找到最下面的 `键盘快捷键` 按钮点击进行修改

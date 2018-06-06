@@ -21,11 +21,11 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "8fdc7030d9b5145d2df3b56cf14d5b22"
+    "revision": "ee517238796fbcdc03def8deb7e9d0ba"
   },
   {
-    "url": "assets/css/2.styles.7c191b99.css",
-    "revision": "582f8a61b9cec8b5391ed5c3b441a062"
+    "url": "assets/css/2.styles.589380f8.css",
+    "revision": "1e9cb367eeac8acd7c8fe8c1fb326a9f"
   },
   {
     "url": "assets/img/search.83621669.svg",
@@ -40,8 +40,8 @@ self.__precacheManifest = [
     "revision": "b041e69385470d7c6717039767fefc35"
   },
   {
-    "url": "assets/js/app.f611a350.js",
-    "revision": "e72f3fb94963ef2101998cd5d1308394"
+    "url": "assets/js/app.68c6d94d.js",
+    "revision": "7110192a52370057532372d74ea1b3e8"
   },
   {
     "url": "img/chrome-icon.png",
@@ -61,11 +61,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "ce9c31f9a53895cd8d6f3da32b10265d"
+    "revision": "ab4bd4939a46f2827d43afb690987d8a"
   },
   {
     "url": "zh/index.html",
-    "revision": "70037e13717c77d8f74a81715af7b8ea"
+    "revision": "0b26171f822c5cd7d749271569b01923"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();

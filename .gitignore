@@ -133,3 +133,4 @@ $RECYCLE.BIN/
 .vscode/*
 dist
 .yarnclean
+gh-pages

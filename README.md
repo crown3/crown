@@ -4,7 +4,7 @@
 
 <h2 align="center">Crown</h2>
 
-A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :alien: :punch:
+A chrome extension to quickly  retrieve and switch your bookmarks and tabs!!! :alien: :punch:
 
 [中文文档](./docs/README_zh.md) | [English document](./README.md)
 
@@ -23,7 +23,7 @@ A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :al
     <img src="./docs/md-img/intro.gif">
 </p>
 
-* Default `alt + s` to open this extension , you can find in your `chrome://extensions/` to set it.
+* Default `alt + s`   to open this extension , you can find in your `chrome://extensions/` to set it.
 * In the input box under the focus to support the following shortcuts
     - `tab`: Toggle bookmark search and tab search
     - `up` & `down`: control the selected item

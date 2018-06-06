@@ -1,5 +1,6 @@
 module.exports = {
   dest: 'gh-pages',
+  base: '/crown/',
   locales: {
     '/': {
       lang: 'en-US',

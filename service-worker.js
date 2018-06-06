@@ -21,7 +21,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 self.__precacheManifest = [
   {
     "url": "404.html",
-    "revision": "ee517238796fbcdc03def8deb7e9d0ba"
+    "revision": "2a86bb1d4579f0227f56adb911cef9f7"
   },
   {
     "url": "assets/css/2.styles.589380f8.css",
@@ -32,16 +32,16 @@ self.__precacheManifest = [
     "revision": "83621669651b9a3d4bf64d1a670ad856"
   },
   {
-    "url": "assets/js/0.7128c6a3.js",
-    "revision": "0a0daf82509007a52574585268b53d89"
+    "url": "assets/js/0.21614f5f.js",
+    "revision": "b95cdf15cc5675b02052b3811ddb0d03"
   },
   {
-    "url": "assets/js/1.e3b1740d.js",
-    "revision": "b041e69385470d7c6717039767fefc35"
+    "url": "assets/js/1.25a7834d.js",
+    "revision": "16ac090a4344cd553ba099d4dc68f495"
   },
   {
-    "url": "assets/js/app.68c6d94d.js",
-    "revision": "7110192a52370057532372d74ea1b3e8"
+    "url": "assets/js/app.d419bac0.js",
+    "revision": "00f956f70d9be78be96f2fe96e7ca50b"
   },
   {
     "url": "img/chrome-icon.png",
@@ -61,11 +61,11 @@ self.__precacheManifest = [
   },
   {
     "url": "index.html",
-    "revision": "ab4bd4939a46f2827d43afb690987d8a"
+    "revision": "572c1e6e3b6e130c53eb921e5ab7726b"
   },
   {
     "url": "zh/index.html",
-    "revision": "0b26171f822c5cd7d749271569b01923"
+    "revision": "d12912a4988fbaee0344aed05c3677e0"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();

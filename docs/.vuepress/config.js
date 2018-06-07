@@ -5,12 +5,12 @@ module.exports = {
     '/': {
       lang: 'en-US',
       title: 'Crown',
-      description: 'Your chrome housekeeper, just like alfred on mac'
+      description: 'A quick launchbar in your chrome, may be your next Alfred in Chrome'
     },
     '/zh/': {
       lang: 'zh-CN',
       title: 'Crown',
-      description: 'Chrome 上的管家'
+      description: '一款 Chrome 上的 launchbar, 希望能成为你 Chrome 上的 Alfred'
     }
   },
   head: [
@@ -40,7 +40,7 @@ module.exports = {
     }],
     ['link', {
       rel: 'mask-icon',
-      href: '~@root/src/assets/crown.svg',
+      href: '/img/crown.svg',
       color: '#3eaf7c'
     }],
     ['meta', {
@@ -54,7 +54,7 @@ module.exports = {
   ],
   serviceWorker: true,
   themeConfig: {
-    repo: 'vuejs/vuepress',
+    repo: 'crown3/crown',
     editLinks: true,
     docsDir: 'docs',
     locales: {
@@ -68,17 +68,18 @@ module.exports = {
             link: '/guide/',
           },
           {
-            text: 'Config Reference',
-            link: '/config/'
+            text: 'Code',
+            link: '/code/'
           },
           {
-            text: 'Default Theme Config',
-            link: '/default-theme-config/'
-          }
+            text: 'About',
+            link: '/about/'
+          },
+          {
+            text: 'Change log',
+            link: '/changelog/'
+          },
         ],
-        sidebar: {
-          '/guide/': genSidebarConfig('Guide')
-        }
       },
       '/zh/': {
         label: '简体中文',
@@ -90,36 +91,19 @@ module.exports = {
             link: '/zh/guide/',
           },
           {
-            text: '配置',
-            link: '/zh/config/'
+            text: '代码',
+            link: '/zh/code/'
           },
           {
-            text: '默认主题',
-            link: '/zh/default-theme-config/'
-          }
+            text: '关于',
+            link: '/zh/about/'
+          },
+          {
+            text: '更新记录',
+            link: '/zh/changelog/'
+          },
         ],
-        sidebar: {
-          '/zh/guide/': genSidebarConfig('指南')
-        }
       }
     }
   }
-}
-
-function genSidebarConfig(title) {
-  return [{
-    title,
-    collapsable: false,
-    children: [
-      '',
-      'getting-started',
-      'basic-config',
-      'assets',
-      'markdown',
-      'using-vue',
-      'custom-themes',
-      'i18n',
-      'deploy'
-    ]
-  }]
 }

@@ -28,18 +28,18 @@ import FormSetting from '@/components/FormSetting/index'
 export default {
   components: {
     Content,
-    FormSetting
+    FormSetting,
   },
   data() {
     return {
-      activeTab: 1
+      activeTab: 1,
     }
   },
   methods: {
     getI18nMsg(...args) {
       return chrome.i18n.getMessage(...args)
-    }
-  }
+    },
+  },
 }
 </script>
 

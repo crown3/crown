@@ -1,50 +1,14 @@
-<p align="center">
-    <img :src="$withBase('/img/crown.svg')"  width="100">
-</p>
-
-<h2 align="center">Crown</h2>
-
-A chrome extension to quickly retrieve and switch your bookmarks and tabs!!! :alien: :punch:
-
-## Download :
-
-<p align="center">
-    <a style="margin:0 50px;" href="https://chrome.google.com/webstore/detail/crown/bfmniheobinjpgcoljkfhhalfeambejo?utm_source=chrome-ntp-icon"><img :src="$withBase('/img/chrome-icon.png')"></a>
-    <a href="https://github.com/crown3/crown/releases"><img :src="$withBase('/img/Github.png')"></a>
-</p>
-
-<h5 align="center">Currently you can download the latest apps from Chrome Web Store and  Github Release</h5>
-
-## Display
-
-<p align="center">
-    <img :src="$withBase('/img/intro.gif')">
-</p>
-
-* Default `alt + s` to open this extension , you can find in your `chrome://extensions/` to set it.
-* In the input box under the focus to support the following shortcuts
-    - `tab`: Toggle bookmark search and tab search
-    - `up` & `down`: control the selected item
-    - `enter`: jump to the appropriate page
-
-## Build
-
-#### This project is mainly developed using `Vue.js`,` Webpack` for management (based on `vue-cli webpack-simple` template)
-
-```bash
-# install dependencies
-npm install
-
-# build for production with minification
-npm run build
-```
-
-> Tips: The files in the `dist` directory generated after the package is the last file we generated. You can add the extension by loading the decompressed extension directly in chrome developer mode or by wrapping it to generate the extension
-
-## License
-
-[MIT](http://opensource.org/licenses/MIT)
-
-## End
-
-The plug-in's `icon` basically come from [Ali Iconfont] (http://www.iconfont.cn/), thanks for these people have been quietly dedicated privately
+---
+home: true
+heroImage: /img/crown.svg
+actionText: How to use →
+actionLink: /guide/
+features:
+- title: 在 Chrome 任何地方使用
+  details: 不仅可以在弹出框启用该插件, 网页中, 搜索栏中也可以
+- title: 自定义各种快捷操作
+  details: 你可以自定义打开弹出框的快捷键, 在网页中打开的快捷键, 以及每个不同搜索子列的快捷键
+- title: 提高效率, 简洁至上
+  details: 让你随时可以快速定位自己需要的内容, 提高你的 Chrome 效率
+footer: MIT Licensed | Copyright © 2017-present Crown Chen
+---

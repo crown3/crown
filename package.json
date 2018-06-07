@@ -4,19 +4,14 @@
   "description": "A Vue.js project",
   "author": "crown <chenjuncrown@gmail.com>",
   "private": true,
-  "pre-commit": [
-    "precommit-msg",
-    "lint"
-  ],
   "scripts": {
-    "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "dev": "webpack --progress --hide-modules --hot --watch --config config/webpack.dev.js",
+    "precommit": "npm run lint",
     "start": "npm run dev",
-    "lint": "eslint --ext .js,.vue src",
-    "prebuild": "npm run lint --fix",
+    "dev": "webpack --progress --hide-modules --hot --watch --config config/webpack.dev.js",
     "build": "node config/build.js",
+    "lint": "eslint --fix --ext .js,.vue src",
     "analyze": "npm_config_report=true node config/build.js",
-    "docs:dev": "vuepress dev docs",
+    "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
@@ -60,7 +55,6 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-url": "^7.2.1",
-    "pre-commit": "^1.2.2",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
@@ -75,7 +69,7 @@
     "vuepress": "^0.10.0",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
-    "webpack-chrome-extension-reloader": "^0.6.5",
+    "webpack-chrome-extension-reloader": "^0.8.3",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0"
   },

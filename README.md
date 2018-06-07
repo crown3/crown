@@ -15,7 +15,7 @@ A chrome extension to quickly  retrieve and switch your bookmarks and tabs!!! :a
     <a href="https://github.com/crown3/crown/releases"><img src="./docs/md-img/Github.png"></a>
 </p>
 
-<h5 align="center">Currently you can download the latest apps from Chrome Web Store and  Github Release</h5>
+<h5 align="center">Currently  you can download the latest apps from Chrome Web Store and  Github Release</h5>
 
 ## Display
 

@@ -4,7 +4,7 @@
     "description": "Extension name"
   },
   "extDesc": {
-    "message": "A chrome extension to quickly retrieve and switch your bookmarks or tabs!!!",
+    "message": "A quick launchbar in your chrome, may be your next Alfred in Chrome",
     "description": "Extended description"
   },
   "versions": {

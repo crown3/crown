@@ -9,7 +9,7 @@ cache:
 branches:
   only:
     - master
-    - dev
+    - develop
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash

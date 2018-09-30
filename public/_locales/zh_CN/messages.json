@@ -1,0 +1,58 @@
+{
+  "extName": {
+    "message": "Crown",
+    "description": "扩展名"
+  },
+  "extDesc": {
+    "message": "一款 Chrome 上的 launchbar, 希望能成为你的下一个 Alfred",
+    "description": "扩展描述"
+  },
+  "versions": {
+    "message": "版本",
+    "description": "扩展版本号"
+  },
+  "bookmark": {
+    "message": "书签",
+    "description": ""
+  },
+  "tab": {
+    "message": "标签页",
+    "description": ""
+  },
+  "closedTab": {
+    "message": "最近关闭的标签页",
+    "description": ""
+  },
+  "opt_setting": {
+    "message": "设置",
+    "description": ""
+  },
+  "opt_about": {
+    "message": "关于",
+    "description": ""
+  },
+  "opt_relatedSettings": {
+    "message": "相关设置",
+    "description": ""
+  },
+  "opt_searchByDefault": {
+    "message": "是否在你的默认搜索结果中出现 $TYPE$ 中的内容 ?",
+    "description": "是否设置为默认搜索结果中的一部分?",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "书签"
+      }
+    }
+  },
+  "opt_setKeyword": {
+    "message": "搜索 $TYPE$ 的关键字",
+    "description": "关键字设置",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "书签"
+      }
+    }
+  }
+}

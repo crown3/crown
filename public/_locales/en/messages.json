@@ -1,0 +1,58 @@
+{
+  "extName": {
+    "message": "Crown",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "A quick launchbar in your chrome, may be your next Alfred in Chrome",
+    "description": "Extended description"
+  },
+  "versions": {
+    "message": "version",
+    "description": "Extended version number"
+  },
+  "bookmark": {
+    "message": "Bookmarks",
+    "description": ""
+  },
+  "tab": {
+    "message": "Tabs",
+    "description": ""
+  },
+  "closedTab": {
+    "message": "Recently Closed Tabs",
+    "description": ""
+  },
+  "opt_setting": {
+    "message": "Setting",
+    "description": ""
+  },
+  "opt_about": {
+    "message": "About",
+    "description": ""
+  },
+  "opt_relatedSettings": {
+    "message": "related setting",
+    "description": ""
+  },
+  "opt_searchByDefault": {
+    "message": "Whether the results of $TYPE$ appear in your default search results ?",
+    "description": "Is it set as part of the default search results",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "bookmarks"
+      }
+    }
+  },
+  "opt_setKeyword": {
+    "message": "The keyword used to search for $TYPE$",
+    "description": "set the keyword",
+    "placeholders": {
+      "type": {
+        "content": "$1",
+        "example": "bookmarks"
+      }
+    }
+  }
+}

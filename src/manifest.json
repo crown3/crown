@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Crown",
   "author": "@chenjuncrown",
-  "homepage_url": "https://github.com/crown3/crown",
+  "homepage_url": "https://crown3.github.io/crown/",
   "description": "__MSG_extDesc__",
   "default_locale": "en",
   "icons": {
@@ -51,5 +51,6 @@
       "js": [ "/content_scripts/main.js" ]
     }
   ],
+  "web_accessible_resources": [ "assets/*.svg" ],
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
 }

@@ -7,17 +7,17 @@ declare module '*.json' {
   export default value
 }
 
-interface QueryResultItem {
+interface SingleQueryResults {
   /** item of search result's type */
   type: 'tab' | 'bookmark' | 'closedTab' | 'keyword'
   /** item of search result's main text */
   title: string | undefined
   /** item of search result's sub text */
   subtitle: string | undefined
+  /** item id */
+  id: number | string
   /** the status is active(selected) ? */
   active?: boolean
-  /** item id */
-  id?: number | string
   /** item keyword */
   keyword?: string
 }
@@ -25,41 +25,42 @@ interface QueryResultItem {
 interface ItemConfig {
   /** Is set as default search option? */
   isDefault: boolean
-  /** The keyword that triggered the search */
+  /** The keyword to trigger the search */
   keyword: string
   /** Related description */
   desc: string
 }
 
-interface ItemSetting {
+interface ItemConfigSet {
   /** The related settings of bookmark */
   bookmark: ItemConfig
   /** The related settings of tab */
   tab: ItemConfig
   /** The related settings of recently closed tab */
-  closedTab: ItemConfig
+  recentlyClosedTab: ItemConfig
 }
 
 interface ExtConfig {
   /** Single setting */
-  itemSetting: ItemSetting
+  itemSet: ItemConfigSet
 }
 
 interface MsgToTab {
-  type?: 'openExtension'
-  data?: any
+  type: 'openExtension'
 }
 
 interface MsgToOthers {
-  data?: any
+  action: 'QueryReq' | 'WebQueryReq' | 'Select'
+  searchStr?: string
+  item?: SingleQueryResults
 }
 
-interface Searchitem {
+interface SingleSearch {
   type: string
-  strArr: string[]
+  searchQueue: string[]
 }
 
-interface OmniboxSearchItem {
+interface SingleOmniboxSearch {
   content: string
   description: string
 }

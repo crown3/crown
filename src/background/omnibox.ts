@@ -1,10 +1,10 @@
 import filterSearchData from '@/background/filter-search-data'
 import handleSelectedItem from '@/background/handle-selected-item'
-import { encodeXml } from '@/components/utils'
-import { debounce } from 'lodash'
+import { encodeXml } from '@c/utils'
+import { browser } from 'webextension-polyfill-ts'
 
 // Cache search results
-let searchResults: QueryResultItem[] = []
+const searchResults: SingleQueryResults[] = []
 
 // Set a default prompt
 function setSuggestion(describe: string) {
@@ -15,27 +15,32 @@ function setSuggestion(describe: string) {
    * 'dim' (for dim helper text).
    * @example '<url><match>src:</match></url> Search Chromium <dim>source</dim>'
    */
-  chrome.omnibox.setDefaultSuggestion({
+  browser.omnibox.setDefaultSuggestion({
     description: describe
   })
 }
 
-function hanldeStr(str: string, suggest: (suggestResults: chrome.omnibox.SuggestResult[]) => void) {
-  // 搜索文字为空时return
-  if (!str) {
-    return
-  }
-  filterSearchData(str).then(temp => {
-    // chrome address bar lists.length <= 5
-    const results: OmniboxSearchItem[] = []
-    const regex = new RegExp(`${str.replace(/\s+/g, '|')}`, 'gi')
-    searchResults = []
+function bindOmniboxEvent() {
+  // User has started a keyword input session by typing the extension's keyword.
+  browser.omnibox.onInputStarted.addListener(() => {
+    setSuggestion('<match>My lord</match> <dim>...</dim>')
+  })
 
-    temp.some(item => {
+  // handle search results
+  browser.omnibox.onInputChanged.addListener(async (text, suggest) => {
+    if (!text) {
+      return
+    }
+    const result = await filterSearchData(text)
+    const temp: SingleOmniboxSearch[] = []
+    const regex = new RegExp(`${text.replace(/\s+/g, '|')}`, 'gi')
+    searchResults.length = 0
+
+    result.some(item => {
       // 提前终止循环
       if (item.type !== 'keyword') {
-        results.push({
-          content: `${item.title} @index=${results.length + 1}`,
+        temp.push({
+          content: `${item.title} @index=${temp.length + 1}`,
           description: `<match>${item.type}</match>: ${`${encodeXml(
             item.title as string
           )} - <url>${encodeXml(item.subtitle as string)}</url>`.replace(regex, '<match>$&</match>')}`
@@ -43,26 +48,16 @@ function hanldeStr(str: string, suggest: (suggestResults: chrome.omnibox.Suggest
 
         searchResults.push(item)
 
-        return results.length > 4
+        return temp.length > 4
       }
       return false
     })
 
-    suggest(results)
+    suggest(temp)
   })
-}
-
-function bindOmniboxEvent() {
-  // User has started a keyword input session by typing the extension's keyword.
-  chrome.omnibox.onInputStarted.addListener(() => {
-    setSuggestion('<match>My lord</match> <dim>...</dim>')
-  })
-
-  // handle search results
-  chrome.omnibox.onInputChanged.addListener(debounce(hanldeStr, 300))
 
   // handle selecting omnibox list item
-  chrome.omnibox.onInputEntered.addListener((...args: string[]) => {
+  browser.omnibox.onInputEntered.addListener((...args: string[]) => {
     /**
      * @param
      * str: adressbar text

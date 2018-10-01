@@ -41,7 +41,7 @@ module.exports = {
     config.plugins.delete('prefetch').delete('preload')
 
     config.resolve.alias
-      .set('@c', resolve('src/components')) // conponents alias
+      .set('@c', resolve('src/common')) // common alias
       .set('lodash-es', 'lodash') // reduce lodash size
 
     // Image Compression
@@ -52,7 +52,17 @@ module.exports = {
       .use('image-webpack-loader')
       .loader('image-webpack-loader')
 
-    // *.svg use svg-url-loader, not file-loader
-    config.module.rule('svg').uses.clear().end().use('svg-url-loader').loader('svg-url-loader')
+    // vuetify
+    config.module.rule('vue').use('vue-loader').loader('vue-loader').tap(options =>
+      Object.assign(options, {
+        transformAssetUrls: {
+          'v-img': [ 'src', 'lazy-src' ],
+          'v-card': 'src',
+          'v-card-media': 'src',
+          'v-responsive': 'src'
+          //...
+        }
+      })
+    )
   }
 }

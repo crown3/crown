@@ -1,108 +1,88 @@
-import { getConfig, queryBM, queryRecentLyClosed, queryTab } from '@/api'
-import { isEachEligible } from '@/components/utils'
-import { concat } from 'async'
+import { queryBM, queryRecentLyClosed, queryTab } from '@/api'
+import store from '@/store'
+import { isEachEligible } from '@c/utils'
 
-let config: ExtConfig
-
-getConfig()
-  .then(response => {
-    config = response
-  })
-  .catch(() => {
-    throw new Error('get setting error in filter-data.js')
-  })
-
-// Real time update setting configuration
-chrome.storage.onChanged.addListener(changes => {
-  if (changes.crown) {
-    config = JSON.parse(changes.crown.newValue)
-  }
-})
+const extConfig: Readonly<ExtConfig> = store.state.config
 
 // Match related keyword list
-function searchKeyword(splitSearchStr: string[]): Promise<QueryResultItem[]> {
-  return new Promise(resolve => {
-    const tmp: QueryResultItem[] = []
-    Object.values(config.itemSetting).forEach(item => {
-      if (isEachEligible(splitSearchStr, `${item.desc} ${item.keyword}`)) {
-        tmp.push({
-          type: 'keyword',
-          title: `Search ${item.desc}`,
-          subtitle: `Search ${item.desc} for "..."`,
-          keyword: item.keyword
-        })
-      }
-    })
-    resolve(tmp)
+function searchKeyword(splitSearchStr: string[]) {
+  const temp: SingleQueryResults[] = []
+  Object.values(extConfig.itemSet).forEach(item => {
+    if (isEachEligible(splitSearchStr, `${item.desc} ${item.keyword}`)) {
+      temp.push({
+        type: 'keyword',
+        title: `Search ${item.desc}`,
+        subtitle: `Search ${item.desc} for "..."`,
+        keyword: item.keyword,
+        id: item.desc
+      })
+    }
   })
+  return temp
 }
 
 // Get an array which need to search
-function filterKeyword(splitSearchStr: string[]): Searchitem[] {
-  let tmp: Searchitem[] = []
-  Object.entries(config.itemSetting).some(([ key, value ]) => {
+function filterKeyword(splitSearchStr: string[]) {
+  const temp: SingleSearch[] = []
+  Object.entries(extConfig.itemSet).some(([ key, value ]) => {
     if (value.keyword === splitSearchStr[0]) {
       // Only search for a category
-      tmp = [
-        {
-          type: key,
-          strArr: splitSearchStr.slice(1)
-        }
-      ]
+      temp.length = 0
+      temp.push({
+        type: key,
+        searchQueue: splitSearchStr.slice(1)
+      })
       return true
     }
     if (value.isDefault) {
-      tmp.push({
+      temp.push({
         type: key,
-        strArr: splitSearchStr
+        searchQueue: splitSearchStr
       })
     }
     return false
   })
   // Whether it is all default search or only search for a category, the keyowrd category should show
-  return [
-    {
-      type: 'keyword',
-      strArr: splitSearchStr
-    },
-    ...tmp
-  ]
+  temp.unshift({
+    type: 'keyword',
+    searchQueue: splitSearchStr
+  })
+  return temp
 }
 
 // Search different items based on different categories
-function searchFromType(item: Searchitem, callback: (arg1: null, arg2: QueryResultItem[]) => void) {
+async function searchFromType(item: SingleSearch) {
+  let result: SingleQueryResults[] = []
   switch (item.type) {
     case 'keyword':
-      searchKeyword(item.strArr).then(tmp => callback(null, tmp))
+      result = searchKeyword(item.searchQueue)
       break
     case 'bookmark':
-      queryBM(item.strArr).then(tmp => callback(null, tmp))
+      result = await queryBM(item.searchQueue)
       break
     case 'tab':
-      queryTab(item.strArr).then(tmp => callback(null, tmp))
+      result = await queryTab(item.searchQueue)
       break
     case 'closedTab':
-      queryRecentLyClosed(item.strArr).then(tmp => callback(null, tmp))
+      result = await queryRecentLyClosed(item.searchQueue)
       break
-
     default:
       break
   }
+  return result
 }
 
-function filterSearchData(searchStr: string): Promise<QueryResultItem[]> {
-  return new Promise((resolve, reject) => {
-    // handle multi space
-    const strArr = searchStr.replace(/  +/g, ' ').split(' ')
-    concat(filterKeyword(strArr), searchFromType, (err, results) => {
-      if (!err) {
-        reject(err)
-      }
-      if (results) {
-        resolve(results as QueryResultItem[])
-      }
-    })
+async function filterSearchData(searchStr: string) {
+  const temp: SingleQueryResults[] = []
+  const strArr = searchStr.replace(/  +/g, ' ').split(' ')
+  const searchPromises = filterKeyword(strArr).map(async item => {
+    const itemResult = await searchFromType(item)
+    return itemResult
   })
+  for (const searchPromise of searchPromises) {
+    temp.push(...(await searchPromise))
+  }
+  return temp
 }
 
 export default filterSearchData

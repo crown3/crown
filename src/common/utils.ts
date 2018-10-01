@@ -12,7 +12,7 @@ function encodeXml(xml: string): string {
  * Whether each item is eligible
  */
 function isEachEligible(arr: any[], tested: string): boolean {
-  return arr.every((item) => new RegExp(`${item}`, 'gi').test(tested))
+  return arr.every(item => new RegExp(`${item}`, 'gi').test(tested))
 }
 
 export { encodeXml, isEachEligible }

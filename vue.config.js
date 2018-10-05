@@ -16,18 +16,12 @@ module.exports = {
       components: {
         background: true,
         popup: true,
-        options: true,
-        contentScripts: true
+        options: true
       },
       api: 'chrome',
       componentOptions: {
         background: {
           entry: 'src/background/main'
-        },
-        contentScripts: {
-          entries: {
-            'content_scripts/main': [ 'src/content_scripts/main' ]
-          }
         }
       }
     }

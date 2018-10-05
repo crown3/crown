@@ -10,7 +10,7 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
-  "permissions": [ "bookmarks", "sessions", "tabs", "storage", "<all_urls>" ],
+  "permissions": [ "bookmarks", "sessions", "tabs" ],
   "background": {
     "scripts": [ "background.js" ],
     "persistent": false
@@ -33,24 +33,9 @@
       "suggested_key": {
         "default": "Alt+X"
       }
-    },
-    "open-in-content": {
-      "description": "open crown in current page",
-      "global": true,
-      "suggested_key": {
-        "default": "Alt+S"
-      }
     }
   },
   "omnibox": {
     "keyword": "c"
-  },
-  "content_scripts": [
-    {
-      "matches": [ "<all_urls>" ],
-      "js": [ "/content_scripts/main.js" ]
-    }
-  ],
-  "web_accessible_resources": [ "assets/*.svg" ],
-  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
+  }
 }

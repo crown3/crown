@@ -24,6 +24,7 @@
     "@vue/cli-service": "^3.0.4",
     "image-webpack-loader": "^4.3.1",
     "lint-staged": "^7.2.2",
+    "opn-cli": "^3.1.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "tslint-config-prettier": "^1.15.0",
@@ -38,12 +39,20 @@
       "autoprefixer": {}
     }
   },
-  "browserslist": [ "Chrome >= 55" ],
+  "browserslist": [
+    "Chrome >= 55"
+  ],
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.ts": [ "vue-cli-service lint", "git add" ],
-    "*.vue": [ "vue-cli-service lint", "git add" ]
+    "*.ts": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }

@@ -1,38 +1,23 @@
 const { resolve } = require('path')
+const ExtensionReload = require('webpack-chrome-extension-reloader')
 
 module.exports = {
   pages: {
-    'popup/popup': {
-      entry: 'src/popup/main',
-      title: 'Popup - Crown'
-    },
-    'options/options': {
-      entry: 'src/options/main',
-      title: 'Options - Crown'
-    }
-  },
-  pluginOptions: {
-    browserExtension: {
-      components: {
-        background: true,
-        popup: true,
-        options: true
-      },
-      api: 'chrome',
-      componentOptions: {
-        background: {
-          entry: 'src/background/main'
-        }
-      }
-    }
+    main: 'src/main.ts',
+    'content-script': 'src/content-script.ts',
+    background: 'src/background/main.ts'
   },
 
   // custom webpack config
-  productionSourceMap: false,
+  productionSourceMap: !!process.env.HOT_RELOADING_ENABLED,
+  filenameHashing: false,
 
   chainWebpack: config => {
-    // remove the prefetch && preload plugin
-    config.plugins.delete('prefetch').delete('preload')
+    if (process.env.HOT_RELOADING_ENABLED) {
+      config.plugin('extension-hotreload').use(ExtensionReload)
+    }
+
+    config.plugins.delete('html-content-script').delete('html-background')
 
     config.resolve.alias
       .set('@c', resolve('src/common')) // common alias

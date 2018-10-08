@@ -131,6 +131,5 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
-@import '~@c/vuetify';
 @import './popup';
 </style>

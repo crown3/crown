@@ -157,7 +157,5 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
-@import '~@c/MDIcon';
-@import '~@c/vuetify';
 @import './options';
 </style>

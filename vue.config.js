@@ -5,7 +5,7 @@ module.exports = {
   pages: {
     main: 'src/main.ts',
     'content-script': 'src/content-script.ts',
-    background: 'src/background/main.ts'
+    background: 'src/background/main.ts',
   },
 
   // custom webpack config
@@ -38,10 +38,10 @@ module.exports = {
           'v-img': [ 'src', 'lazy-src' ],
           'v-card': 'src',
           'v-card-media': 'src',
-          'v-responsive': 'src'
+          'v-responsive': 'src',
           //...
-        }
+        },
       })
     )
-  }
+  },
 }

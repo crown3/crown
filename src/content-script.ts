@@ -3,7 +3,9 @@ import { browser } from 'webextension-polyfill-ts'
 
 const frag = document.createElement('div')
 frag.id = 'CrownExtensionWrapper'
-frag.innerHTML = `<iframe id="CrownExtensionIframe" src="${browser.runtime.getURL('main.html#/content')}"></iframe>`
+frag.innerHTML = `<iframe id="CrownExtensionIframe" scrolling="no" src="${browser.runtime.getURL(
+  'main.html#/content'
+)}"></iframe>`
 document.body.appendChild(frag)
 
 const ele = document.getElementById('CrownExtensionWrapper') as HTMLElement

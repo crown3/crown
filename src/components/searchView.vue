@@ -1,5 +1,5 @@
 <template>
-<v-app :style="'width: '+mainWidth+'px'">
+<v-app :style="'width: '+mainWidth+'px; min-height: 70px'">
   <v-toolbar app height="70">
     <v-layout align-center>
       <v-flex xs2>
@@ -19,7 +19,7 @@
     </v-layout>
   </v-toolbar>
 
-  <v-content>
+  <v-content v-show="items.length">
     <v-container
       fluid
       ref="scrollTarget"
@@ -42,16 +42,16 @@
           @click="selectItem(item)"
         >
           <v-list-tile-avatar tile>
-            <img v-if="item.type === 'tab'" src="~@/assets/tab.svg" >
-            <img v-else-if="item.type === 'bookmark'" src="~@/assets/bookmark.svg" >
-            <img v-else-if="item.type === 'closedTab'" src="~@/assets/lamp.svg" >
-            <img v-else-if="item.type === 'keyword'" src="~@/assets/keyword.svg" >
+            <img v-if="item.type === 'tab'" src="~@/assets/tab.svg" />
+            <img v-else-if="item.type === 'bookmark'" src="~@/assets/bookmark.svg" />
+            <img v-else-if="item.type === 'closedTab'" src="~@/assets/lamp.svg" />
+            <img v-else-if="item.type === 'keyword'" src="~@/assets/keyword.svg" />
           </v-list-tile-avatar>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-html="item.title"></v-list-tile-title>
-              <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
-            </v-list-tile-content>
+          <v-list-tile-content>
+            <v-list-tile-title v-html="item.title"></v-list-tile-title>
+            <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+          </v-list-tile-content>
         </v-list-tile>
       </v-list>
     </v-container>
@@ -68,14 +68,14 @@ import {
   browser
 } from 'webextension-polyfill-ts'
 export default Vue.extend({
-  props:{
-    isInContent:{
+  props: {
+    isInContent: {
       type: Boolean,
       default: false
     },
-    mainWidth:{
-      type:Number,
-      default:400
+    mainWidth: {
+      type: Number,
+      default: 400
     }
   },
   data() {
@@ -92,13 +92,17 @@ export default Vue.extend({
   },
   created() {
     browser.runtime.onMessage.addListener(response => {
+      if (!this.inputMsg) {
+        this.items = []
+        return
+      }
       this.items = response
     })
   },
   methods: {
     requestUpdateList(str: string) {
       sendMsg({
-        action: this.isInContent?'WebQueryReq': 'QueryReq',
+        action: this.isInContent ? 'WebQueryReq' : 'QueryReq',
         searchStr: str
       })
     },

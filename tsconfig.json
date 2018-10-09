@@ -13,7 +13,7 @@
     "types": [ "webpack-env", "vuetify" ],
     "paths": {
       "@/*": [ "src/*" ],
-      "@c/*": [ "src/common/*" ]
+      "@c/*": [ "src/components/*" ]
     },
     "lib": [ "esnext", "dom", "dom.iterable", "scripthost" ]
   },

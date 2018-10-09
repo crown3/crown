@@ -1,5 +1,5 @@
 <template>
-<v-app style="width: 400px">
+<v-app :style="'width: '+mainWidth+'px'">
   <v-toolbar app height="70">
     <v-layout align-center>
       <v-flex xs2>
@@ -68,6 +68,16 @@ import {
   browser
 } from 'webextension-polyfill-ts'
 export default Vue.extend({
+  props:{
+    isInContent:{
+      type: Boolean,
+      default: false
+    },
+    mainWidth:{
+      type:Number,
+      default:400
+    }
+  },
   data() {
     return {
       inputMsg: '',
@@ -88,7 +98,7 @@ export default Vue.extend({
   methods: {
     requestUpdateList(str: string) {
       sendMsg({
-        action: 'QueryReq',
+        action: this.isInContent?'WebQueryReq': 'QueryReq',
         searchStr: str
       })
     },

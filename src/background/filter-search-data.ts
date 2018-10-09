@@ -1,6 +1,6 @@
 import { queryBM, queryRecentLyClosed, queryTab } from '@/api'
+import { isEachEligible } from '@/common/utils'
 import store from '@/store'
-import { isEachEligible } from '@c/utils'
 
 const extConfig: Readonly<ExtConfig> = store.state.config
 

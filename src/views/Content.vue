@@ -1,5 +1,11 @@
 <template>
-  <div class="about">
-    <h1>This is an content page</h1>
-  </div>
+<searchView isInContent :mainWidth="666"></searchView>
 </template>
+
+<script lang="ts">
+import searchView from '@c/searchView.vue'
+import Vue from 'vue'
+export default Vue.extend({
+  components:{searchView}
+})
+</script>

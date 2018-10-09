@@ -1,6 +1,20 @@
+import '@/stylus/content-script.styl'
 import { browser } from 'webextension-polyfill-ts'
 
 const frag = document.createElement('div')
-frag.id = 'Test'
-frag.innerHTML = `<iframe id="TestIframe" src="${browser.runtime.getURL('main.html#/content')}"></iframe>`
+frag.id = 'CrownExtensionWrapper'
+frag.innerHTML = `<iframe id="CrownExtensionIframe" src="${browser.runtime.getURL('main.html#/content')}"></iframe>`
 document.body.appendChild(frag)
+
+const ele = document.getElementById('CrownExtensionWrapper') as HTMLElement
+browser.runtime.onMessage.addListener(response => {
+  if (response.type === 'openExtension') {
+    ele.style.display = 'block'
+  }
+})
+
+document.body.addEventListener('click', (event: Event) => {
+  if (!(ele === event.target || ele.contains(event.target as Element))) {
+    ele.style.display = 'none'
+  }
+})

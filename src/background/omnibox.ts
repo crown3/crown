@@ -1,6 +1,6 @@
 import filterSearchData from '@/background/filter-search-data'
 import handleSelectedItem from '@/background/handle-selected-item'
-import { encodeXml } from '@c/utils'
+import { encodeXml } from '@/common/utils'
 import { browser } from 'webextension-polyfill-ts'
 
 // Cache search results

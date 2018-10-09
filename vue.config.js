@@ -20,7 +20,7 @@ module.exports = {
     config.plugins.delete('html-content-script').delete('html-background')
 
     config.resolve.alias
-      .set('@c', resolve('src/common')) // common alias
+      .set('@c', resolve('src/components')) // common alias
       .set('lodash-es', 'lodash') // reduce lodash size
 
     // Image Compression

@@ -13,7 +13,7 @@ import VTextField from 'vuetify/es5/components/VTextField'
 import VToolbar from 'vuetify/es5/components/VToolbar'
 import Vuetify from 'vuetify/es5/components/Vuetify'
 
-import '@c/vuetify.styl'
+import '@/stylus/vuetify.styl'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 Vue.use(Vuetify, {

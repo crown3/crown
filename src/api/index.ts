@@ -1,4 +1,4 @@
-import { isEachEligible } from '@c/utils'
+import { isEachEligible } from '@/common/utils'
 import { browser } from 'webextension-polyfill-ts'
 
 /**

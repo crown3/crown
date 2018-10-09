@@ -157,5 +157,5 @@ export default Vue.extend({
 </script>
 
 <style lang="stylus">
-@import './options';
+@import '~@/stylus/options';
 </style>

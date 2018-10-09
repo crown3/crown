@@ -7,7 +7,7 @@
     "lint": "vue-cli-service lint",
     "preanalyze": "vue-cli-service build --report",
     "analyze": "opn ./dist/report.html",
-    "dev": "HOT_RELOADING_ENABLED=true vue-cli-service build --watch --mode production",
+    "dev": "vue-cli-service build --watch --mode reloading",
     "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
@@ -40,20 +40,12 @@
       "autoprefixer": {}
     }
   },
-  "browserslist": [
-    "Chrome >= 55"
-  ],
+  "browserslist": [ "Chrome >= 55" ],
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.ts": [
-      "vue-cli-service lint",
-      "git add"
-    ],
-    "*.vue": [
-      "vue-cli-service lint",
-      "git add"
-    ]
+    "*.ts": [ "vue-cli-service lint", "git add" ],
+    "*.vue": [ "vue-cli-service lint", "git add" ]
   }
 }

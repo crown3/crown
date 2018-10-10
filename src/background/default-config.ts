@@ -1,4 +1,4 @@
-const defaultConfig: ExtConfig = {
+const defaultConfig: ExtensionConfig = {
   itemSet: {
     bookmark: {
       isDefault: true,

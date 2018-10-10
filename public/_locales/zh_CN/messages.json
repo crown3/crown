@@ -35,6 +35,10 @@
     "message": "相关设置",
     "description": ""
   },
+  "isAvaliable": {
+    "message": "因为浏览器设置的限制，你无法在此页打开弹出框。",
+    "description": ""
+  },
   "opt_searchByDefault": {
     "message": "是否在你的默认搜索结果中出现 $TYPE$ 中的内容 ?",
     "description": "是否设置为默认搜索结果中的一部分?",

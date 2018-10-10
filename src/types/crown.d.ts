@@ -7,21 +7,6 @@ declare module '*.json' {
   export default value
 }
 
-interface SingleQueryResults {
-  /** item of search result's type */
-  type: 'tab' | 'bookmark' | 'closedTab' | 'keyword'
-  /** item of search result's main text */
-  title: string | undefined
-  /** item of search result's sub text */
-  subtitle: string | undefined
-  /** item id */
-  id: number | string
-  /** the status is active(selected) ? */
-  active?: boolean
-  /** item keyword */
-  keyword?: string
-}
-
 interface ItemConfig {
   /** Is set as default search option? */
   isDefault: boolean
@@ -40,19 +25,9 @@ interface ItemConfigSet {
   recentlyClosedTab: ItemConfig
 }
 
-interface ExtConfig {
+interface ExtensionConfig {
   /** Single setting */
   itemSet: ItemConfigSet
-}
-
-interface MsgToTab {
-  type: 'openExtension'
-}
-
-interface MsgToOthers {
-  action: 'QueryReq' | 'WebQueryReq' | 'Select'
-  searchStr?: string
-  item?: SingleQueryResults
 }
 
 interface SingleSearch {
@@ -63,4 +38,47 @@ interface SingleSearch {
 interface SingleOmniboxSearch {
   content: string
   description: string
+}
+
+// new interface
+type CSource = 'background' | 'content' | 'content-script' | 'popup'
+
+interface CMessageBasic {
+  from: CSource
+  to: CSource
+}
+
+interface CMessage1 extends CMessageBasic {
+  type: 'select'
+  content: QueryResultItem
+}
+
+interface CMessage2 extends CMessageBasic {
+  type: 'openExtension'
+}
+
+interface CMessage3 extends CMessageBasic {
+  type: 'queryResult'
+  content: QueryResultItem[]
+}
+interface CMessage4 extends CMessageBasic {
+  type: 'queryRequest'
+  content: string
+}
+
+type CMessage = CMessage1 | CMessage2 | CMessage3 | CMessage4
+
+interface QueryResultItem {
+  /** item of search result's type */
+  type: 'tab' | 'bookmark' | 'closedTab' | 'keyword'
+  /** item of search result's main text */
+  title: string | undefined
+  /** item of search result's sub text */
+  subtitle: string | undefined
+  /** item id */
+  id: number | string
+  /** the status is active(selected) ? */
+  active?: boolean
+  /** item keyword */
+  keyword?: string
 }

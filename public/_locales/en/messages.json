@@ -35,6 +35,10 @@
     "message": "related setting",
     "description": ""
   },
+  "isAvaliable": {
+    "message": "You cannot open a popup on this page because of browser restrictions.",
+    "description": ""
+  },
   "opt_searchByDefault": {
     "message": "Whether the results of $TYPE$ appear in your default search results ?",
     "description": "Is it set as part of the default search results",

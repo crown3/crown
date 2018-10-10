@@ -7,7 +7,7 @@
         </v-flex>
         <v-flex xs10 sm11>
           <v-text-field
-            autofocus
+            :autofocus="!isInContent"
             placeholder="My Lord ..."
             ref="input"
             v-model="inputMsg"
@@ -81,34 +81,52 @@ export default Vue.extend({
     },
   },
   created() {
-    browser.runtime.onMessage.addListener(response => {
+    browser.runtime.onMessage.addListener((response: CMessage) => {
+      if (response.type === 'openExtension') {
+        this.focusInput()
+      }
+      if (response.type !== 'queryResult') {
+        return
+      }
+
+      if (response.to !== (this.isInContent ? 'content' : 'popup')) {
+        return
+      }
+
       if (!this.inputMsg) {
         this.items = []
         return
       }
-      this.items = response
+      (this.items as QueryResultItem[]) = response.content
     })
   },
   methods: {
     requestUpdateList(str: string) {
       sendMsg({
-        action: this.isInContent ? 'WebQueryReq' : 'QueryReq',
-        searchStr: str,
+        from: this.isInContent ? 'content' : 'popup',
+        to: 'background',
+        type: 'queryRequest',
+        content: str,
       })
     },
-    selectItem(item: SingleQueryResults) {
+    selectItem(item: QueryResultItem) {
       if (!this.items.length) {
         return
       }
       if (item.type === 'keyword') {
         this.inputMsg = item.keyword + ' '
-        ;(this.$refs.input as HTMLElement).focus()
+        this.focusInput()
         return
       }
       sendMsg({
-        action: 'Select',
-        item,
+        from: this.isInContent ? 'content' : 'popup',
+        to: 'background',
+        type: 'select',
+        content: item,
       })
+    },
+    focusInput() {
+      (this.$refs.input as HTMLElement).focus()
     },
     controlSelectedItem(direction: 'up' | 'down') {
       switch (direction) {

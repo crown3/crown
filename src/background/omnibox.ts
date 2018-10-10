@@ -4,7 +4,7 @@ import { encodeXml } from '@/common/utils'
 import { browser } from 'webextension-polyfill-ts'
 
 // Cache search results
-const searchResults: SingleQueryResults[] = []
+const searchResults: QueryResultItem[] = []
 
 // Set a default prompt
 function setSuggestion(describe: string) {

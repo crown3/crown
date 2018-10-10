@@ -14,7 +14,7 @@ async function queryBM(queryQueue: string[]) {
     return []
   }
   const result = await browser.bookmarks.search(queryQueue[0])
-  const temp: SingleQueryResults[] = []
+  const temp: QueryResultItem[] = []
   for (const item of result) {
     if (item.dateGroupModified) {
       break
@@ -40,7 +40,7 @@ async function queryTab(queryQueue: string[]) {
     windowId: browser.windows.WINDOW_ID_CURRENT,
     windowType: 'normal',
   })
-  const temp: SingleQueryResults[] = []
+  const temp: QueryResultItem[] = []
   for (const item of result) {
     // if length === 0, show all tabs data
     if (
@@ -64,16 +64,20 @@ async function queryTab(queryQueue: string[]) {
  * send message to the special tab.
  * @link that extensions cannot send messages to content scripts using browser.runtime.sendMessage. To send messages to content scripts, use tabs.sendMessage.
  */
-function sendMsgToTab(id: number, data: MsgToTab | SingleQueryResults[]) {
-  browser.tabs.sendMessage(id, data)
+async function sendMsgToTab(id: number, data: CMessage) {
+  try {
+    await browser.tabs.sendMessage(id, data)
+  } catch (error) {
+    // if currnet tab isn't available, alert a tip
+    alert(browser.i18n.getMessage('isAvaliable'))
+  }
 }
 
 /**
  * send message with using browser.runtime
  */
-function sendMsg(data: MsgToOthers | SingleQueryResults[]) {
+function sendMsg(data: CMessage) {
   browser.runtime.sendMessage(data)
-  // chrome.runtime.sendMessage(data)
 }
 
 /**
@@ -112,7 +116,7 @@ function openNewTab(url: string) {
  */
 async function queryRecentLyClosed(queryQueue: string[]) {
   const result = await browser.sessions.getRecentlyClosed({ maxResults: 25 })
-  const temp: SingleQueryResults[] = []
+  const temp: QueryResultItem[] = []
   for (const item of result) {
     // filter tab
     if (!item.tab) {

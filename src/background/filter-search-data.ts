@@ -2,11 +2,11 @@ import { queryBM, queryRecentLyClosed, queryTab } from '@/api'
 import { isEachEligible } from '@/common/utils'
 import store from '@/store'
 
-const extConfig: Readonly<ExtConfig> = store.state.config
+const extConfig: Readonly<ExtensionConfig> = store.state.config
 
 // Match related keyword list
 function searchKeyword(splitSearchStr: string[]) {
-  const temp: SingleQueryResults[] = []
+  const temp: QueryResultItem[] = []
   Object.values(extConfig.itemSet).forEach(item => {
     if (isEachEligible(splitSearchStr, `${item.desc} ${item.keyword}`)) {
       temp.push({
@@ -52,7 +52,7 @@ function filterKeyword(splitSearchStr: string[]) {
 
 // Search different items based on different categories
 async function searchFromType(item: SingleSearch) {
-  let result: SingleQueryResults[] = []
+  let result: QueryResultItem[] = []
   switch (item.type) {
     case 'keyword':
       result = searchKeyword(item.searchQueue)
@@ -73,7 +73,7 @@ async function searchFromType(item: SingleSearch) {
 }
 
 async function filterSearchData(searchStr: string) {
-  const temp: SingleQueryResults[] = []
+  const temp: QueryResultItem[] = []
   const strArr = searchStr.replace(/  +/g, ' ').split(' ')
   const searchPromises = filterKeyword(strArr).map(async item => {
     const itemResult = await searchFromType(item)

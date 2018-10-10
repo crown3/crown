@@ -9,7 +9,7 @@ frag.innerHTML = `<iframe id="CrownExtensionIframe" scrolling="no" src="${browse
 document.body.appendChild(frag)
 
 const ele = document.getElementById('CrownExtensionWrapper') as HTMLElement
-browser.runtime.onMessage.addListener(response => {
+browser.runtime.onMessage.addListener((response: CMessage) => {
   if (response.type === 'openExtension') {
     ele.style.display = 'block'
   }

@@ -1,6 +1,6 @@
 import { openNewTab, restoreRecentTab, updateTabStatus } from '@/api'
 
-function handleSelectedItem(item: SingleQueryResults) {
+function handleSelectedItem(item: QueryResultItem) {
   switch (item.type) {
     case 'bookmark':
       openNewTab(item.subtitle as string)

@@ -10,35 +10,42 @@ browser.commands.onCommand.addListener(async command => {
     // find current tab, then send a message to show(or insert) extension dom
     const { id } = await findActiveTab()
     sendMsgToTab(id as number, {
-      type: 'openExtension'
+      from: 'background',
+      to: 'content-script',
+      type: 'openExtension',
     })
   }
 })
 
-browser.runtime.onMessage.addListener(async request => {
-  // Ignore some other useless messages
-  if (!request.action) {
+browser.runtime.onMessage.addListener(async (request: CMessage) => {
+  if (request.type === 'select') {
+    handleSelectedItem(request.content)
     return
   }
-  switch (request.action) {
-    case 'Select':
-      // Process selected options
-      handleSelectedItem(request.item)
-      break
-    case 'QueryReq':
-      // Query normally
-      const temp = await filterSearchData(request.searchStr)
-      sendMsg(temp)
-      break
-    case 'WebQueryReq':
-      // Query requests from web pages
-      const { id } = await findActiveTab()
-      const data = await filterSearchData(request.searchStr)
-      sendMsgToTab(id as number, data)
-      break
-
-    default:
-      break
+  if (request.type === 'queryRequest') {
+    const result = await filterSearchData(request.content)
+    switch (request.from) {
+      case 'popup':
+        sendMsg({
+          from: 'background',
+          to: 'popup',
+          type: 'queryResult',
+          content: result,
+        })
+        break
+      case 'content':
+        const { id } = await findActiveTab()
+        sendMsgToTab(id as number, {
+          from: 'background',
+          to: 'content',
+          type: 'queryResult',
+          content: result,
+        })
+        break
+      default:
+        break
+    }
+    return
   }
 })
 

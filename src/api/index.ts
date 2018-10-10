@@ -24,7 +24,7 @@ async function queryBM(queryQueue: string[]) {
         type: 'bookmark',
         title: item.title || item.url,
         subtitle: item.url,
-        id: item.id
+        id: item.id,
       })
     }
   }
@@ -38,19 +38,22 @@ async function queryTab(queryQueue: string[]) {
   // Similar to the above queryBM method
   const result = await browser.tabs.query({
     windowId: browser.windows.WINDOW_ID_CURRENT,
-    windowType: 'normal'
+    windowType: 'normal',
   })
   const temp: SingleQueryResults[] = []
   for (const item of result) {
     // if length === 0, show all tabs data
-    if (queryQueue.length === 0 || isEachEligible(queryQueue, `${item.url} ${item.title}`)) {
+    if (
+      queryQueue.length === 0 ||
+      isEachEligible(queryQueue, `${item.url} ${item.title}`)
+    ) {
       temp.push({
         type: 'tab',
         title: item.title,
         subtitle: item.url,
 
         active: item.highlighted && item.active,
-        id: item.id as number
+        id: item.id as number,
       })
     }
   }
@@ -79,7 +82,7 @@ function sendMsg(data: MsgToOthers | SingleQueryResults[]) {
 async function findActiveTab() {
   const result = await browser.tabs.query({
     active: true,
-    currentWindow: true
+    currentWindow: true,
   })
   return result[0]
 }
@@ -91,7 +94,7 @@ function updateTabStatus(
   id: number,
   status = {
     highlighted: true,
-    active: true
+    active: true,
   }
 ) {
   browser.tabs.update(id, status)
@@ -115,12 +118,15 @@ async function queryRecentLyClosed(queryQueue: string[]) {
     if (!item.tab) {
       break
     }
-    if (queryQueue.length === 0 || isEachEligible(queryQueue, `${item.tab.url} ${item.tab.title}`)) {
+    if (
+      queryQueue.length === 0 ||
+      isEachEligible(queryQueue, `${item.tab.url} ${item.tab.title}`)
+    ) {
       temp.push({
         type: 'closedTab',
         title: item.tab.title,
         subtitle: item.tab.url,
-        id: item.tab.sessionId as string
+        id: item.tab.sessionId as string,
       })
     }
   }
@@ -143,5 +149,5 @@ export {
   restoreRecentTab,
   sendMsg,
   sendMsgToTab,
-  updateTabStatus
+  updateTabStatus,
 }

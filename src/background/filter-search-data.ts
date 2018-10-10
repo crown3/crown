@@ -14,7 +14,7 @@ function searchKeyword(splitSearchStr: string[]) {
         title: `Search ${item.desc}`,
         subtitle: `Search ${item.desc} for "..."`,
         keyword: item.keyword,
-        id: item.desc
+        id: item.desc,
       })
     }
   })
@@ -24,20 +24,20 @@ function searchKeyword(splitSearchStr: string[]) {
 // Get an array which need to search
 function filterKeyword(splitSearchStr: string[]) {
   const temp: SingleSearch[] = []
-  Object.entries(extConfig.itemSet).some(([ key, value ]) => {
+  Object.entries(extConfig.itemSet).some(([key, value]) => {
     if (value.keyword === splitSearchStr[0]) {
       // Only search for a category
       temp.length = 0
       temp.push({
         type: key,
-        searchQueue: splitSearchStr.slice(1)
+        searchQueue: splitSearchStr.slice(1),
       })
       return true
     }
     if (value.isDefault) {
       temp.push({
         type: key,
-        searchQueue: splitSearchStr
+        searchQueue: splitSearchStr,
       })
     }
     return false
@@ -45,7 +45,7 @@ function filterKeyword(splitSearchStr: string[]) {
   // Whether it is all default search or only search for a category, the keyowrd category should show
   temp.unshift({
     type: 'keyword',
-    searchQueue: splitSearchStr
+    searchQueue: splitSearchStr,
   })
   return temp
 }

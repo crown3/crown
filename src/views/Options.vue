@@ -1,60 +1,70 @@
 <template>
-<v-app style="width: 700px;">
-  <v-toolbar app>
-    <v-layout align-center justify-space-between>
-      <v-tabs color="transparent">
-        <v-tab @click="goTo('#bookmark')">
-          <v-icon>book</v-icon>
-        </v-tab>
-
-        <v-tab @click="goTo('#tab')">
-          <v-icon>tab</v-icon>
-        </v-tab>
-      </v-tabs>
-      <v-icon @click="toProjectHomePage">link</v-icon>
-    </v-layout>
-  </v-toolbar>
-
-  <v-content>
-    <v-container fluid class="pa-0">
-      <h3 class="headline" id="bookmark"># {{getI18nMsg('bookmark')}}</h3>
-      <v-layout align-center>
-        <v-flex xs6 class="pr-3">
-          <v-switch :label="getI18nMsg('opt_searchByDefault', 'bookmarks')" v-model="isBMDefault"></v-switch>
-        </v-flex>
-        <v-flex xs6 class="pl-3">
-          <v-text-field v-model="BMKeyword" :rules="rules.name" :label="getI18nMsg('opt_setKeyword', 'bookmarks')"></v-text-field>
-        </v-flex>
+  <v-app style="width: 700px;">
+    <v-toolbar app>
+      <v-layout align-center justify-space-between>
+        <v-tabs color="transparent">
+          <v-tab @click="goTo('#bookmark')">
+            <v-icon>book</v-icon>
+          </v-tab>
+          <v-tab @click="goTo('#tab')">
+            <v-icon>tab</v-icon>
+          </v-tab>
+        </v-tabs>
+        <v-icon @click="toProjectHomePage">link</v-icon>
       </v-layout>
-
-      <h3 class="headline" id="tab"># {{getI18nMsg('tab')}}</h3>
-      <v-layout align-center>
-        <v-flex xs6 class="pr-3">
-          <v-switch :label="getI18nMsg('opt_searchByDefault', 'tabs')" v-model="isTabDefault"></v-switch>
-        </v-flex>
-        <v-flex xs6 class="pl-3">
-          <v-text-field v-model="TabKeyword" :rules="rules.name" :label="getI18nMsg('opt_setKeyword', 'tabs')"></v-text-field>
-        </v-flex>
-      </v-layout>
-      <v-layout align-center>
-        <v-flex xs6 class="pr-3">
-          <v-switch :label="getI18nMsg('opt_searchByDefault', 'recently closed tabs')" v-model="isRCTDefault"></v-switch>
-        </v-flex>
-        <v-flex xs6 class="pl-3">
-          <v-text-field v-model="RCTKeyword" :rules="rules.name" :label="getI18nMsg('opt_setKeyword', 'recently closed tabs')"></v-text-field>
-        </v-flex>
-      </v-layout>
-    </v-container>
-  </v-content>
-</v-app>
+    </v-toolbar>
+    <v-content>
+      <v-container fluid class="pa-0">
+        <h3 class="headline" id="bookmark"># {{getI18nMsg('bookmark')}}</h3>
+        <v-layout align-center>
+          <v-flex xs6 class="pr-3">
+            <v-switch :label="getI18nMsg('opt_searchByDefault', 'bookmarks')" v-model="isBMDefault"></v-switch>
+          </v-flex>
+          <v-flex xs6 class="pl-3">
+            <v-text-field
+              v-model="BMKeyword"
+              :rules="rules.name"
+              :label="getI18nMsg('opt_setKeyword', 'bookmarks')"
+            ></v-text-field>
+          </v-flex>
+        </v-layout>
+        <h3 class="headline" id="tab"># {{getI18nMsg('tab')}}</h3>
+        <v-layout align-center>
+          <v-flex xs6 class="pr-3">
+            <v-switch :label="getI18nMsg('opt_searchByDefault', 'tabs')" v-model="isTabDefault"></v-switch>
+          </v-flex>
+          <v-flex xs6 class="pl-3">
+            <v-text-field
+              v-model="TabKeyword"
+              :rules="rules.name"
+              :label="getI18nMsg('opt_setKeyword', 'tabs')"
+            ></v-text-field>
+          </v-flex>
+        </v-layout>
+        <v-layout align-center>
+          <v-flex xs6 class="pr-3">
+            <v-switch
+              :label="getI18nMsg('opt_searchByDefault', 'recently closed tabs')"
+              v-model="isRCTDefault"
+            ></v-switch>
+          </v-flex>
+          <v-flex xs6 class="pl-3">
+            <v-text-field
+              v-model="RCTKeyword"
+              :rules="rules.name"
+              :label="getI18nMsg('opt_setKeyword', 'recently closed tabs')"
+            ></v-text-field>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script lang="ts">
 import defaultConfig from '@/background/default-config'
 import Vue from 'vue'
-import {
-  browser
-} from 'webextension-polyfill-ts'
+import { browser } from 'webextension-polyfill-ts'
 
 export default Vue.extend({
   computed: {
@@ -66,9 +76,9 @@ export default Vue.extend({
         this.$store.commit('changeItemConfig', {
           type: 'bookmark',
           key: 'isDefault',
-          value
+          value,
         })
-      }
+      },
     },
     isTabDefault: {
       get(): boolean {
@@ -78,9 +88,9 @@ export default Vue.extend({
         this.$store.commit('changeItemConfig', {
           type: 'tab',
           key: 'isDefault',
-          value
+          value,
         })
-      }
+      },
     },
     isRCTDefault: {
       get(): boolean {
@@ -90,9 +100,9 @@ export default Vue.extend({
         this.$store.commit('changeItemConfig', {
           type: 'recentlyClosedTab',
           key: 'isDefault',
-          value
+          value,
         })
-      }
+      },
     },
     BMKeyword: {
       get(): string {
@@ -102,9 +112,9 @@ export default Vue.extend({
         this.$store.commit('changeItemConfig', {
           type: 'bookmark',
           key: 'keyword',
-          value
+          value,
         })
-      }
+      },
     },
     TabKeyword: {
       get(): string {
@@ -114,9 +124,9 @@ export default Vue.extend({
         this.$store.commit('changeItemConfig', {
           type: 'tab',
           key: 'keyword',
-          value
+          value,
         })
-      }
+      },
     },
     RCTKeyword: {
       get(): string {
@@ -126,16 +136,18 @@ export default Vue.extend({
         this.$store.commit('changeItemConfig', {
           type: 'recentlyClosedTab',
           key: 'keyword',
-          value
+          value,
         })
-      }
-    }
+      },
+    },
   },
   data() {
     return {
       rules: {
-        name: [(value: string = '') => value.length > 0 || 'This field i required']
-      }
+        name: [
+          (value: string = '') => value.length > 0 || 'This field i required',
+        ],
+      },
     }
   },
   methods: {
@@ -145,14 +157,14 @@ export default Vue.extend({
     goTo(target: string) {
       this.$vuetify.goTo(target, {
         offset: -60,
-        duration: 100
+        duration: 100,
       })
     },
     // get msg translation from browser.i18n
-    getI18nMsg(name: string, other ? : any) {
+    getI18nMsg(name: string, other?: any) {
       return browser.i18n.getMessage(name, other)
-    }
-  }
+    },
+  },
 })
 </script>
 

@@ -3,19 +3,19 @@ const defaultConfig: ExtConfig = {
     bookmark: {
       isDefault: true,
       keyword: 'bm',
-      desc: 'Bookmarks'
+      desc: 'Bookmarks',
     },
     tab: {
       isDefault: true,
       keyword: 't',
-      desc: 'Tabs'
+      desc: 'Tabs',
     },
     recentlyClosedTab: {
       isDefault: false,
       keyword: 'rct',
-      desc: 'Recently Closed Tabs'
-    }
-  }
+      desc: 'Recently Closed Tabs',
+    },
+  },
 }
 
 export default defaultConfig

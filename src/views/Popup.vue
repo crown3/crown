@@ -1,11 +1,11 @@
 <template>
-<searchView :mainWidth="400"></searchView>
+  <searchView :mainWidth="400"></searchView>
 </template>
 
 <script lang="ts">
 import searchView from '@c/searchView.vue'
 import Vue from 'vue'
 export default Vue.extend({
-  components:{searchView}
+  components: { searchView },
 })
 </script>

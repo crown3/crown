@@ -16,7 +16,7 @@ function setSuggestion(describe: string) {
    * @example '<url><match>src:</match></url> Search Chromium <dim>source</dim>'
    */
   browser.omnibox.setDefaultSuggestion({
-    description: describe
+    description: describe,
   })
 }
 
@@ -43,7 +43,10 @@ function bindOmniboxEvent() {
           content: `${item.title} @index=${temp.length + 1}`,
           description: `<match>${item.type}</match>: ${`${encodeXml(
             item.title as string
-          )} - <url>${encodeXml(item.subtitle as string)}</url>`.replace(regex, '<match>$&</match>')}`
+          )} - <url>${encodeXml(item.subtitle as string)}</url>`.replace(
+            regex,
+            '<match>$&</match>'
+          )}`,
         })
 
         searchResults.push(item)

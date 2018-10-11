@@ -54,7 +54,7 @@
 </template>
 
 <script lang="ts">
-import { sendMsg } from '@/api'
+import { findActiveTab, sendMsg, sendMsgToActiveTab } from '@/api'
 import Vue from 'vue'
 import { browser } from 'webextension-polyfill-ts'
 export default Vue.extend({
@@ -85,11 +85,10 @@ export default Vue.extend({
       if (response.type === 'openExtension') {
         this.focusInput()
       }
-      if (response.type !== 'queryResult') {
-        return
-      }
-
-      if (response.to !== (this.isInContent ? 'content' : 'popup')) {
+      if (
+        response.type !== 'queryResult' ||
+        response.to !== (this.isInContent ? 'content' : 'popup')
+      ) {
         return
       }
 
@@ -97,7 +96,7 @@ export default Vue.extend({
         this.items = []
         return
       }
-      (this.items as QueryResultItem[]) = response.content
+     (this.items as QueryResultItem[]) = response.content
     })
   },
   methods: {
@@ -118,6 +117,15 @@ export default Vue.extend({
         this.focusInput()
         return
       }
+      if (this.isInContent) {
+        this.inputMsg = ''
+        this.items = []
+        sendMsgToActiveTab({
+          from: 'background',
+          to: 'content-script',
+          type: 'closeExtension',
+        })
+      }
       sendMsg({
         from: this.isInContent ? 'content' : 'popup',
         to: 'background',
@@ -126,7 +134,7 @@ export default Vue.extend({
       })
     },
     focusInput() {
-      (this.$refs.input as HTMLElement).focus()
+     (this.$refs.input as HTMLElement).focus()
     },
     controlSelectedItem(direction: 'up' | 'down') {
       switch (direction) {
@@ -145,7 +153,7 @@ export default Vue.extend({
       }
 
       this.$nextTick(() => {
-        (this.$refs.scrollTarget as HTMLElement).scrollTop =
+       (this.$refs.scrollTarget as HTMLElement).scrollTop =
           72 * this.selectedIndex
       })
     },

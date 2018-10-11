@@ -10,8 +10,16 @@ document.body.appendChild(frag)
 
 const ele = document.getElementById('CrownExtensionWrapper') as HTMLElement
 browser.runtime.onMessage.addListener((response: CMessage) => {
-  if (response.type === 'openExtension') {
-    ele.style.display = 'block'
+  switch (response.type) {
+    case 'openExtension':
+      ele.style.display = 'block'
+      break
+    case 'closeExtension':
+      ele.style.display = 'none'
+      break
+
+    default:
+      break
   }
 })
 

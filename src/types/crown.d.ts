@@ -40,7 +40,6 @@ interface SingleOmniboxSearch {
   description: string
 }
 
-// new interface
 type CSource = 'background' | 'content' | 'content-script' | 'popup'
 
 interface CMessageBasic {
@@ -54,7 +53,7 @@ interface CMessage1 extends CMessageBasic {
 }
 
 interface CMessage2 extends CMessageBasic {
-  type: 'openExtension'
+  type: 'openExtension' | 'closeExtension'
 }
 
 interface CMessage3 extends CMessageBasic {

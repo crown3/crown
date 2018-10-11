@@ -64,9 +64,10 @@ async function queryTab(queryQueue: string[]) {
  * send message to the special tab.
  * @link that extensions cannot send messages to content scripts using browser.runtime.sendMessage. To send messages to content scripts, use tabs.sendMessage.
  */
-async function sendMsgToTab(id: number, data: CMessage) {
+async function sendMsgToActiveTab(data: CMessage) {
   try {
-    await browser.tabs.sendMessage(id, data)
+    const { id } = await findActiveTab()
+    await browser.tabs.sendMessage(id as number, data)
   } catch (error) {
     // if currnet tab isn't available, alert a tip
     alert(browser.i18n.getMessage('isAvaliable'))
@@ -152,6 +153,6 @@ export {
   queryTab,
   restoreRecentTab,
   sendMsg,
-  sendMsgToTab,
+  sendMsgToActiveTab,
   updateTabStatus,
 }

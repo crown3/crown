@@ -1,4 +1,4 @@
-import { findActiveTab, sendMsg, sendMsgToTab } from '@/api'
+import { findActiveTab, sendMsg, sendMsgToActiveTab } from '@/api'
 import filterSearchData from '@/background/filter-search-data'
 import handleSelectedItem from '@/background/handle-selected-item'
 import bindOmniboxEvent from '@/background/omnibox'
@@ -8,8 +8,7 @@ browser.commands.onCommand.addListener(async command => {
   // custom command
   if (command === 'open-in-content') {
     // find current tab, then send a message to show(or insert) extension dom
-    const { id } = await findActiveTab()
-    sendMsgToTab(id as number, {
+    sendMsgToActiveTab({
       from: 'background',
       to: 'content-script',
       type: 'openExtension',
@@ -34,8 +33,7 @@ browser.runtime.onMessage.addListener(async (request: CMessage) => {
         })
         break
       case 'content':
-        const { id } = await findActiveTab()
-        sendMsgToTab(id as number, {
+        sendMsgToActiveTab({
           from: 'background',
           to: 'content',
           type: 'queryResult',

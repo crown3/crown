@@ -7,10 +7,10 @@
         </v-flex>
         <v-flex xs10 sm11>
           <v-text-field
-            :autofocus="!isInContent"
-            placeholder="My Lord ..."
             ref="input"
             v-model="inputMsg"
+            :autofocus="!isInContent"
+            :placeholder="I18n('searchPlaceholder')"
             @keydown.up.prevent="controlSelectedItem('up')"
             @keydown.down.prevent="controlSelectedItem('down')"
             @keydown.enter.prevent="selectItem(items[selectedIndex])"
@@ -31,7 +31,12 @@
             <v-list-tile-content>
               <v-list-tile-title v-html="item.title"></v-list-tile-title>
               <v-list-tile-sub-title>
-                <v-chip class="ml-0" color="warning" text-color="white" small>{{item.type}}</v-chip>
+                <v-chip
+                  class="ml-0"
+                  color="warning"
+                  text-color="white"
+                  small
+                >{{I18n(item.type+'_label')}}</v-chip>
                 {{item.subtitle}}
               </v-list-tile-sub-title>
             </v-list-tile-content>
@@ -149,6 +154,10 @@ export default Vue.extend({
         to: 'content-script',
         type: 'closeExtension',
       })
+    },
+    // get msg translation from browser.i18n
+    I18n(name: string, other?: any) {
+      return browser.i18n.getMessage(name, other)
     },
   },
 })

@@ -1,47 +1,44 @@
 {
-  "extName": {
-    "message": "Crown",
-    "description": "扩展名"
-  },
   "extDesc": {
-    "message": "一款 Chrome 上的 launchbar, 希望能成为你的下一个 Alfred",
+    "message": "一款能让你的 Chrome 更加顺滑的 Launchbar !!!",
     "description": "扩展描述"
   },
-  "versions": {
-    "message": "版本",
-    "description": "扩展版本号"
+  "contentHotKey": {
+    "message": "open crown extension in your current page",
+    "description": "在网页中唤起 Crown 扩展"
+  },
+  "searchPlaceholder": {
+    "message": "等候您的指令...",
+    "description": "searchView 输入框的默认提示语"
   },
   "bookmark": {
+    "message": "书签"
+  },
+  "bookmark_label": {
     "message": "书签",
-    "description": ""
+    "description": "书签在搜索列表中的标记"
   },
   "tab": {
-    "message": "标签页",
-    "description": ""
+    "message": "标签页"
   },
-  "closedTab": {
-    "message": "最近关闭的标签页",
-    "description": ""
+  "tab_label": {
+    "message": "标签",
+    "description": "标签在搜索列表中的标记"
   },
-  "opt_setting": {
-    "message": "设置",
-    "description": ""
+  "RCT": {
+    "message": "最近关闭的标签页"
   },
-  "opt_about": {
-    "message": "关于",
-    "description": ""
+  "RCT_label": {
+    "message": "最近关闭",
+    "description": "最近关闭的标签页在搜索列表中的标识"
   },
-  "opt_relatedSettings": {
-    "message": "相关设置",
-    "description": ""
+  "contentScript_unavailable": {
+    "message": "因为浏览器的限制, 您无法在改页面唤醒 Crown 扩展",
+    "description": "content-script 不可用时的提示语"
   },
-  "isAvaliable": {
-    "message": "因为浏览器设置的限制，你无法在此页打开弹出框。",
-    "description": ""
-  },
-  "opt_searchByDefault": {
-    "message": "是否在你的默认搜索结果中出现 $TYPE$ 中的内容 ?",
-    "description": "是否设置为默认搜索结果中的一部分?",
+  "isSetDefault": {
+    "message": "在默认的搜索列表中显示来自 $TYPE$ 的结果?",
+    "description": "在默认搜索结果中显示某分类下的结果",
     "placeholders": {
       "type": {
         "content": "$1",
@@ -49,9 +46,9 @@
       }
     }
   },
-  "opt_setKeyword": {
-    "message": "搜索 $TYPE$ 的关键字",
-    "description": "关键字设置",
+  "keywordOfSet": {
+    "message": "用来触发单独搜索 $TYPE$ 的关键字",
+    "description": "单类搜索的触发关键字",
     "placeholders": {
       "type": {
         "content": "$1",

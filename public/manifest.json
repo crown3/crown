@@ -11,9 +11,9 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
-  "permissions": [ "bookmarks", "sessions", "tabs", "<all_urls>" ],
+  "permissions": ["bookmarks", "sessions", "tabs", "<all_urls>"],
   "background": {
-    "scripts": [ "js/chunk-vendors.js", "js/background.js" ],
+    "scripts": ["js/chunk-vendors.js", "js/background.js"],
     "persistent": false
   },
   "browser_action": {
@@ -31,13 +31,13 @@
   },
   "content_scripts": [
     {
-      "matches": [ "<all_urls>" ],
-      "css": [ "css/content-script.css" ],
-      "js": [ "js/chunk-vendors.js", "js/content-script.js" ]
+      "matches": ["<all_urls>"],
+      "css": ["css/content-script.css"],
+      "js": ["js/chunk-vendors.js", "js/content-script.js"]
     }
   ],
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
-  "web_accessible_resources": [ "main.html", "js/*.js", "css/*.css" ],
+  "web_accessible_resources": ["main.html", "js/*.js", "css/*.css"],
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
@@ -45,7 +45,7 @@
       }
     },
     "open-in-content": {
-      "description": "open crown in current page",
+      "description": "__MSG_contentHotKey__",
       "global": true,
       "suggested_key": {
         "default": "Alt+S"

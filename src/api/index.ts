@@ -70,7 +70,7 @@ async function sendMsgToActiveTab(data: CMessage) {
     await browser.tabs.sendMessage(id as number, data)
   } catch (error) {
     // if currnet tab isn't available, alert a tip
-    alert(browser.i18n.getMessage('isAvaliable'))
+    alert(browser.i18n.getMessage('contentScript_unavailable'))
   }
 }
 

@@ -15,44 +15,41 @@
     </v-toolbar>
     <v-content>
       <v-container fluid class="pa-0">
-        <h3 class="headline" id="bookmark"># {{getI18nMsg('bookmark')}}</h3>
+        <h3 class="headline" id="bookmark"># {{I18n('bookmark')}}</h3>
         <v-layout align-center>
           <v-flex xs6 class="pr-3">
-            <v-switch :label="getI18nMsg('opt_searchByDefault', 'bookmarks')" v-model="isBMDefault"></v-switch>
+            <v-switch :label="I18n('isSetDefault', I18n('bookmark'))" v-model="isBMDefault"></v-switch>
           </v-flex>
           <v-flex xs6 class="pl-3">
             <v-text-field
               v-model="BMKeyword"
               :rules="rules.name"
-              :label="getI18nMsg('opt_setKeyword', 'bookmarks')"
+              :label="I18n('keywordOfSet', I18n('bookmark'))"
             ></v-text-field>
           </v-flex>
         </v-layout>
-        <h3 class="headline" id="tab"># {{getI18nMsg('tab')}}</h3>
+        <h3 class="headline" id="tab"># {{I18n('tab')}}</h3>
         <v-layout align-center>
           <v-flex xs6 class="pr-3">
-            <v-switch :label="getI18nMsg('opt_searchByDefault', 'tabs')" v-model="isTabDefault"></v-switch>
+            <v-switch :label="I18n('isSetDefault', I18n('tab'))" v-model="isTabDefault"></v-switch>
           </v-flex>
           <v-flex xs6 class="pl-3">
             <v-text-field
               v-model="TabKeyword"
               :rules="rules.name"
-              :label="getI18nMsg('opt_setKeyword', 'tabs')"
+              :label="I18n('keywordOfSet', I18n('tab'))"
             ></v-text-field>
           </v-flex>
         </v-layout>
         <v-layout align-center>
           <v-flex xs6 class="pr-3">
-            <v-switch
-              :label="getI18nMsg('opt_searchByDefault', 'recently closed tabs')"
-              v-model="isRCTDefault"
-            ></v-switch>
+            <v-switch :label="I18n('isSetDefault', I18n('RCT'))" v-model="isRCTDefault"></v-switch>
           </v-flex>
           <v-flex xs6 class="pl-3">
             <v-text-field
               v-model="RCTKeyword"
               :rules="rules.name"
-              :label="getI18nMsg('opt_setKeyword', 'recently closed tabs')"
+              :label="I18n('keywordOfSet', I18n('RCT'))"
             ></v-text-field>
           </v-flex>
         </v-layout>
@@ -161,7 +158,7 @@ export default Vue.extend({
       })
     },
     // get msg translation from browser.i18n
-    getI18nMsg(name: string, other?: any) {
+    I18n(name: string, other?: any) {
       return browser.i18n.getMessage(name, other)
     },
   },

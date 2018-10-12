@@ -1,47 +1,44 @@
 {
-  "extName": {
-    "message": "Crown",
-    "description": "Extension name"
-  },
   "extDesc": {
-    "message": "A quick launchbar in your chrome, may be your next Alfred in Chrome",
-    "description": "Extended description"
+    "message": "A launchbar in your chrome, which make you chrome smoother!!!",
+    "description": "Extension description"
   },
-  "versions": {
-    "message": "version",
-    "description": "Extended version number"
+  "contentHotKey": {
+    "message": "open crown extension in your current page",
+    "description": "the hot key's tip to open content-script"
+  },
+  "searchPlaceholder": {
+    "message": "My Lord ...",
+    "description": "the input placeholder in searchView"
   },
   "bookmark": {
-    "message": "Bookmarks",
-    "description": ""
+    "message": "Bookmarks"
+  },
+  "bookmark_label": {
+    "message": "BM",
+    "description": "bookmark label in search list"
   },
   "tab": {
-    "message": "Tabs",
-    "description": ""
+    "message": "Tabs"
   },
-  "closedTab": {
-    "message": "Recently Closed Tabs",
-    "description": ""
+  "tab_label": {
+    "message": "Tab",
+    "description": "bookmark label in search list"
   },
-  "opt_setting": {
-    "message": "Setting",
-    "description": ""
+  "RCT": {
+    "message": "Recently Closed Tabs"
   },
-  "opt_about": {
-    "message": "About",
-    "description": ""
+  "RCT_label": {
+    "message": "RCT",
+    "description": "Recently closed tabs label in search list"
   },
-  "opt_relatedSettings": {
-    "message": "related setting",
-    "description": ""
-  },
-  "isAvaliable": {
+  "contentScript_unavailable": {
     "message": "You cannot open a popup on this page because of browser restrictions.",
-    "description": ""
+    "description": "a tip when content-script is unavailable"
   },
-  "opt_searchByDefault": {
-    "message": "Whether the results of $TYPE$ appear in your default search results ?",
-    "description": "Is it set as part of the default search results",
+  "isSetDefault": {
+    "message": "Whether the results of $TYPE$ will appear in your default search results ?",
+    "description": "Is it set to a part of the default search results?",
     "placeholders": {
       "type": {
         "content": "$1",
@@ -49,9 +46,9 @@
       }
     }
   },
-  "opt_setKeyword": {
+  "keywordOfSet": {
     "message": "The keyword used to search for $TYPE$",
-    "description": "set the keyword",
+    "description": "set the keyword to search",
     "placeholders": {
       "type": {
         "content": "$1",

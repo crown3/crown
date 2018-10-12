@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 
 import VApp from 'vuetify/es5/components/VApp'
+import VChip from 'vuetify/es5/components/VChip'
 import VGrid from 'vuetify/es5/components/VGrid'
 import VIcon from 'vuetify/es5/components/VIcon'
 import VList from 'vuetify/es5/components/VList'
@@ -26,6 +27,7 @@ Vue.use(Vuetify, {
     VIcon,
     VSwitch,
     VTabs,
+    VChip,
   },
 })
 

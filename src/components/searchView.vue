@@ -14,6 +14,7 @@
             @keydown.up.prevent="controlSelectedItem('up')"
             @keydown.down.prevent="controlSelectedItem('down')"
             @keydown.enter.prevent="selectItem(items[selectedIndex])"
+            @keydown.esc.prevent="hideInActiveTab"
           ></v-text-field>
         </v-flex>
       </v-layout>
@@ -21,30 +22,18 @@
     <v-content v-show="items.length">
       <v-container fluid ref="scrollTarget" class="pa-0" style="max-height: 500px;overflow: auto;">
         <v-list two-line>
-          <!-- <template v-for="(item, index) in items">
-          <v-subheader v-if="item.header" :key="item.header">
-            {{ item.header }}
-          </v-subheader>
-
-          <v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>
-          </template>-->
-
           <v-list-tile
-            avatar
             v-for="(item, index) in items"
             :key="item.id"
             :class="{'is-active': selectedIndex === index}"
             @click="selectItem(item)"
           >
-            <v-list-tile-avatar tile>
-              <img v-if="item.type === 'tab'" src="~@/assets/tab.svg">
-              <img v-else-if="item.type === 'bookmark'" src="~@/assets/bookmark.svg">
-              <img v-else-if="item.type === 'closedTab'" src="~@/assets/lamp.svg">
-              <img v-else-if="item.type === 'keyword'" src="~@/assets/keyword.svg">
-            </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title v-html="item.title"></v-list-tile-title>
-              <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+              <v-list-tile-sub-title>
+                <v-chip class="ml-0" color="warning" text-color="white" small>{{item.type}}</v-chip>
+                {{item.subtitle}}
+              </v-list-tile-sub-title>
             </v-list-tile-content>
           </v-list-tile>
         </v-list>
@@ -96,7 +85,7 @@ export default Vue.extend({
         this.items = []
         return
       }
-     (this.items as QueryResultItem[]) = response.content
+      (this.items as QueryResultItem[]) = response.content
     })
   },
   methods: {
@@ -117,15 +106,7 @@ export default Vue.extend({
         this.focusInput()
         return
       }
-      if (this.isInContent) {
-        this.inputMsg = ''
-        this.items = []
-        sendMsgToActiveTab({
-          from: 'background',
-          to: 'content-script',
-          type: 'closeExtension',
-        })
-      }
+      this.hideInActiveTab()
       sendMsg({
         from: this.isInContent ? 'content' : 'popup',
         to: 'background',
@@ -134,7 +115,7 @@ export default Vue.extend({
       })
     },
     focusInput() {
-     (this.$refs.input as HTMLElement).focus()
+      (this.$refs.input as HTMLElement).focus()
     },
     controlSelectedItem(direction: 'up' | 'down') {
       switch (direction) {
@@ -153,8 +134,20 @@ export default Vue.extend({
       }
 
       this.$nextTick(() => {
-       (this.$refs.scrollTarget as HTMLElement).scrollTop =
+        (this.$refs.scrollTarget as HTMLElement).scrollTop =
           72 * this.selectedIndex
+      })
+    },
+    hideInActiveTab() {
+      if (!this.isInContent) {
+        return
+      }
+      this.inputMsg = ''
+      this.items = []
+      sendMsgToActiveTab({
+        from: 'background',
+        to: 'content-script',
+        type: 'closeExtension',
       })
     },
   },

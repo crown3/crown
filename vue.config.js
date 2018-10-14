@@ -12,6 +12,31 @@ module.exports = {
   productionSourceMap: !!process.env.HOT_RELOADING_ENABLED,
   filenameHashing: false,
 
+  configureWebpack: {
+    optimization: {
+      // just split js
+      splitChunks: {
+        cacheGroups: {
+          vendors: {
+            name: 'chunk-vendors',
+            test: /[\\\/]node_modules[\\\/].*js/,
+            minChunks: 2,
+            priority: -10,
+            chunks: 'initial',
+          },
+          common: {
+            name: 'chunk-common',
+            test: /\.js$/,
+            minChunks: 2,
+            priority: -20,
+            chunks: 'initial',
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
+  },
+
   chainWebpack: config => {
     if (process.env.HOT_RELOADING_ENABLED) {
       config.plugin('extension-hotreload').use(ExtensionReload)

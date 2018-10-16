@@ -91,11 +91,11 @@ export default Vue.extend({
     },
     isRCTDefault: {
       get(): boolean {
-        return this.$store.state.config.itemSet.recentlyClosedTab.isDefault
+        return this.$store.state.config.itemSet.RCT.isDefault
       },
       set(value: boolean) {
         this.$store.commit('changeItemConfig', {
-          type: 'recentlyClosedTab',
+          type: 'RCT',
           key: 'isDefault',
           value,
         })
@@ -127,11 +127,11 @@ export default Vue.extend({
     },
     RCTKeyword: {
       get(): string {
-        return this.$store.state.config.itemSet.recentlyClosedTab.keyword
+        return this.$store.state.config.itemSet.RCT.keyword
       },
       set(value: string) {
         this.$store.commit('changeItemConfig', {
-          type: 'recentlyClosedTab',
+          type: 'RCT',
           key: 'keyword',
           value,
         })

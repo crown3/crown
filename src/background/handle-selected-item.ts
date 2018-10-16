@@ -8,7 +8,7 @@ function handleSelectedItem(item: QueryResultItem) {
     case 'tab':
       updateTabStatus(item.id as number)
       break
-    case 'closedTab':
+    case 'RCT':
       restoreRecentTab(item.id as string)
       break
 

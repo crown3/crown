@@ -1,5 +1,5 @@
 import { queryBM, queryRecentLyClosed, queryTab } from '@/api'
-import { isEachEligible } from '@/common/utils'
+import { getKeys, isEachEligible } from '@/common/utils'
 import store from '@/store'
 
 const extConfig: Readonly<ExtensionConfig> = store.state.config
@@ -24,7 +24,8 @@ function searchKeyword(splitSearchStr: string[]) {
 // Get an array which need to search
 function filterKeyword(splitSearchStr: string[]) {
   const temp: SingleSearch[] = []
-  Object.entries(extConfig.itemSet).some(([key, value]) => {
+  getKeys(extConfig.itemSet).some(key => {
+    const value = extConfig.itemSet[key]
     if (value.keyword === splitSearchStr[0]) {
       // Only search for a category
       temp.length = 0
@@ -63,7 +64,7 @@ async function searchFromType(item: SingleSearch) {
     case 'tab':
       result = await queryTab(item.searchQueue)
       break
-    case 'closedTab':
+    case 'RCT':
       result = await queryRecentLyClosed(item.searchQueue)
       break
     default:

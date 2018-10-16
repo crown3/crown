@@ -10,7 +10,7 @@ const defaultConfig: ExtensionConfig = {
       keyword: 't',
       desc: 'Tabs',
     },
-    recentlyClosedTab: {
+    RCT: {
       isDefault: false,
       keyword: 'rct',
       desc: 'Recently Closed Tabs',

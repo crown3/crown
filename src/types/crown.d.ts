@@ -16,23 +16,9 @@ interface ItemConfig {
   desc: string
 }
 
-interface ItemConfigSet {
-  /** The related settings of bookmark */
-  bookmark: ItemConfig
-  /** The related settings of tab */
-  tab: ItemConfig
-  /** The related settings of recently closed tab */
-  recentlyClosedTab: ItemConfig
-}
-
 interface ExtensionConfig {
   /** Single setting */
   itemSet: ItemConfigSet
-}
-
-interface SingleSearch {
-  type: string
-  searchQueue: string[]
 }
 
 interface SingleOmniboxSearch {
@@ -67,9 +53,11 @@ interface CMessage4 extends CMessageBasic {
 
 type CMessage = CMessage1 | CMessage2 | CMessage3 | CMessage4
 
+type CMessageType = 'tab' | 'bookmark' | 'RCT' | 'keyword'
+
 interface QueryResultItem {
   /** item of search result's type */
-  type: 'tab' | 'bookmark' | 'closedTab' | 'keyword'
+  type: CMessageType
   /** item of search result's main text */
   title: string | undefined
   /** item of search result's sub text */
@@ -80,4 +68,18 @@ interface QueryResultItem {
   active?: boolean
   /** item keyword */
   keyword?: string
+}
+
+interface SingleSearch {
+  type: CMessageType
+  searchQueue: string[]
+}
+
+interface ItemConfigSet {
+  /** The related settings of bookmark */
+  bookmark: ItemConfig
+  /** The related settings of tab */
+  tab: ItemConfig
+  /** The related settings of recently closed tab */
+  RCT: ItemConfig
 }

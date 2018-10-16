@@ -4,7 +4,7 @@
     "description": "扩展描述"
   },
   "contentHotKey": {
-    "message": "open crown extension in your current page",
+    "message": "在网页中打开 Crown 扩展",
     "description": "在网页中唤起 Crown 扩展"
   },
   "searchPlaceholder": {
@@ -31,6 +31,10 @@
   "RCT_label": {
     "message": "最近关闭",
     "description": "最近关闭的标签页在搜索列表中的标识"
+  },
+  "keyword_label": {
+    "message": "关键词",
+    "description": "检索触发关键词在搜索列表中的标识"
   },
   "contentScript_unavailable": {
     "message": "因为浏览器的限制, 您无法在改页面唤醒 Crown 扩展",

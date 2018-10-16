@@ -32,6 +32,10 @@
     "message": "RCT",
     "description": "Recently closed tabs label in search list"
   },
+  "keyword_label": {
+    "message": "keyword",
+    "description": "keyword label in search list"
+  },
   "contentScript_unavailable": {
     "message": "You cannot open a popup on this page because of browser restrictions.",
     "description": "a tip when content-script is unavailable"

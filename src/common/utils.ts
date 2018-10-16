@@ -15,4 +15,7 @@ function isEachEligible(arr: any[], tested: string): boolean {
   return arr.every(item => new RegExp(`${item}`, 'gi').test(tested))
 }
 
-export { encodeXml, isEachEligible }
+const getKeys = <T extends {}>(o: T): Array<keyof T> =>
+  Object.keys(o) as Array<keyof T>
+
+export { encodeXml, isEachEligible, getKeys }

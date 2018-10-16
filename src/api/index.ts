@@ -128,7 +128,7 @@ async function queryRecentLyClosed(queryQueue: string[]) {
       isEachEligible(queryQueue, `${item.tab.url} ${item.tab.title}`)
     ) {
       temp.push({
-        type: 'closedTab',
+        type: 'RCT',
         title: item.tab.title,
         subtitle: item.tab.url,
         id: item.tab.sessionId as string,

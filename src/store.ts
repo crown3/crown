@@ -18,7 +18,7 @@ export default new Vuex.Store({
   },
   mutations: {
     changeItemConfig(state, payload: ChangeItemConfigPayload) {
-      state.config.itemSet[payload.type][payload.key] = payload.value
+      state.config[payload.type][payload.key] = payload.value
     },
   },
   plugins: [createPersistedState()],

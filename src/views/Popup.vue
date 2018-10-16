@@ -9,3 +9,7 @@ export default Vue.extend({
   components: { searchView },
 })
 </script>
+
+<style lang="stylus">
+@import '~@/stylus/popup';
+</style>

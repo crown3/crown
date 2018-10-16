@@ -1,20 +1,18 @@
 const defaultConfig: ExtensionConfig = {
-  itemSet: {
-    bookmark: {
-      isDefault: true,
-      keyword: 'bm',
-      desc: 'Bookmarks',
-    },
-    tab: {
-      isDefault: true,
-      keyword: 't',
-      desc: 'Tabs',
-    },
-    RCT: {
-      isDefault: false,
-      keyword: 'rct',
-      desc: 'Recently Closed Tabs',
-    },
+  bookmark: {
+    isDefault: true,
+    keyword: 'bm',
+    desc: 'Bookmarks',
+  },
+  tab: {
+    isDefault: true,
+    keyword: 't',
+    desc: 'Tabs',
+  },
+  RCT: {
+    isDefault: false,
+    keyword: 'rct',
+    desc: 'Recently Closed Tabs',
   },
 }
 

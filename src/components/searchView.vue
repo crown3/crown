@@ -162,7 +162,3 @@ export default Vue.extend({
   },
 })
 </script>
-
-<style lang="stylus" scoped>
-@import '~@/stylus/popup';
-</style>

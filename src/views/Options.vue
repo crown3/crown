@@ -67,7 +67,7 @@ export default Vue.extend({
   computed: {
     isBMDefault: {
       get(): boolean {
-        return this.$store.state.config.itemSet.bookmark.isDefault
+        return this.$store.state.config.bookmark.isDefault
       },
       set(value: boolean) {
         this.$store.commit('changeItemConfig', {
@@ -79,7 +79,7 @@ export default Vue.extend({
     },
     isTabDefault: {
       get(): boolean {
-        return this.$store.state.config.itemSet.tab.isDefault
+        return this.$store.state.config.tab.isDefault
       },
       set(value: boolean) {
         this.$store.commit('changeItemConfig', {
@@ -91,7 +91,7 @@ export default Vue.extend({
     },
     isRCTDefault: {
       get(): boolean {
-        return this.$store.state.config.itemSet.RCT.isDefault
+        return this.$store.state.config.RCT.isDefault
       },
       set(value: boolean) {
         this.$store.commit('changeItemConfig', {
@@ -103,7 +103,7 @@ export default Vue.extend({
     },
     BMKeyword: {
       get(): string {
-        return this.$store.state.config.itemSet.bookmark.keyword
+        return this.$store.state.config.bookmark.keyword
       },
       set(value: string) {
         this.$store.commit('changeItemConfig', {
@@ -115,7 +115,7 @@ export default Vue.extend({
     },
     TabKeyword: {
       get(): string {
-        return this.$store.state.config.itemSet.tab.keyword
+        return this.$store.state.config.tab.keyword
       },
       set(value: string) {
         this.$store.commit('changeItemConfig', {
@@ -127,7 +127,7 @@ export default Vue.extend({
     },
     RCTKeyword: {
       get(): string {
-        return this.$store.state.config.itemSet.RCT.keyword
+        return this.$store.state.config.RCT.keyword
       },
       set(value: string) {
         this.$store.commit('changeItemConfig', {

@@ -7,20 +7,6 @@ declare module '*.json' {
   export default value
 }
 
-interface ItemConfig {
-  /** Is set as default search option? */
-  isDefault: boolean
-  /** The keyword to trigger the search */
-  keyword: string
-  /** Related description */
-  desc: string
-}
-
-interface ExtensionConfig {
-  /** Single setting */
-  itemSet: ItemConfigSet
-}
-
 interface SingleOmniboxSearch {
   content: string
   description: string
@@ -75,11 +61,20 @@ interface SingleSearch {
   searchQueue: string[]
 }
 
-interface ItemConfigSet {
+interface ExtensionConfig {
   /** The related settings of bookmark */
-  bookmark: ItemConfig
+  bookmark: ItemSearchConfig
   /** The related settings of tab */
-  tab: ItemConfig
+  tab: ItemSearchConfig
   /** The related settings of recently closed tab */
-  RCT: ItemConfig
+  RCT: ItemSearchConfig
+}
+
+interface ItemSearchConfig {
+  /** Is set as default search option? */
+  isDefault: boolean
+  /** The keyword to trigger the search */
+  keyword: string
+  /** Related description */
+  desc: string
 }

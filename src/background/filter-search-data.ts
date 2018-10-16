@@ -7,7 +7,7 @@ const extConfig: Readonly<ExtensionConfig> = store.state.config
 // Match related keyword list
 function searchKeyword(splitSearchStr: string[]) {
   const temp: QueryResultItem[] = []
-  Object.values(extConfig.itemSet).forEach(item => {
+  Object.values(extConfig).forEach(item => {
     if (isEachEligible(splitSearchStr, `${item.desc} ${item.keyword}`)) {
       temp.push({
         type: 'keyword',
@@ -24,8 +24,8 @@ function searchKeyword(splitSearchStr: string[]) {
 // Get an array which need to search
 function filterKeyword(splitSearchStr: string[]) {
   const temp: SingleSearch[] = []
-  getKeys(extConfig.itemSet).some(key => {
-    const value = extConfig.itemSet[key]
+  getKeys(extConfig).some(key => {
+    const value = extConfig[key]
     if (value.keyword === splitSearchStr[0]) {
       // Only search for a category
       temp.length = 0

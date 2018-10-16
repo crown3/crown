@@ -102,7 +102,7 @@ export default Vue.extend({
         content: str,
       })
     },
-    selectItem(item: QueryResultItem) {
+    async selectItem(item: QueryResultItem) {
       if (!this.items.length) {
         return
       }
@@ -111,7 +111,7 @@ export default Vue.extend({
         this.focusInput()
         return
       }
-      this.hideInActiveTab()
+      await this.hideInActiveTab()
       sendMsg({
         from: this.isInContent ? 'content' : 'popup',
         to: 'background',
@@ -143,13 +143,13 @@ export default Vue.extend({
           72 * this.selectedIndex
       })
     },
-    hideInActiveTab() {
+    async hideInActiveTab() {
       if (!this.isInContent) {
         return
       }
       this.inputMsg = ''
       this.items = []
-      sendMsgToActiveTab({
+      await sendMsgToActiveTab({
         from: 'background',
         to: 'content-script',
         type: 'closeExtension',

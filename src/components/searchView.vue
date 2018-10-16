@@ -9,7 +9,7 @@
           <v-text-field
             ref="input"
             v-model="inputMsg"
-            :autofocus="!isInContent"
+            autofocus
             :placeholder="I18n('searchPlaceholder')"
             @keydown.up.prevent="controlSelectedItem('up')"
             @keydown.down.prevent="controlSelectedItem('down')"
@@ -102,7 +102,7 @@ export default Vue.extend({
         content: str,
       })
     },
-    async selectItem(item: QueryResultItem) {
+    selectItem(item: QueryResultItem) {
       if (!this.items.length) {
         return
       }
@@ -111,7 +111,6 @@ export default Vue.extend({
         this.focusInput()
         return
       }
-      await this.hideInActiveTab()
       sendMsg({
         from: this.isInContent ? 'content' : 'popup',
         to: 'background',
@@ -143,13 +142,11 @@ export default Vue.extend({
           72 * this.selectedIndex
       })
     },
-    async hideInActiveTab() {
+    hideInActiveTab() {
       if (!this.isInContent) {
         return
       }
-      this.inputMsg = ''
-      this.items = []
-      await sendMsgToActiveTab({
+      sendMsgToActiveTab({
         from: 'background',
         to: 'content-script',
         type: 'closeExtension',

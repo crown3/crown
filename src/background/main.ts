@@ -18,6 +18,14 @@ browser.commands.onCommand.addListener(async command => {
 
 browser.runtime.onMessage.addListener(async (request: CMessage) => {
   if (request.type === 'select') {
+    if (request.from === 'content') {
+      const { id } = await findActiveTab()
+      browser.tabs.sendMessage(id as number, {
+        from: 'background',
+        to: 'content-script',
+        type: 'closeExtension',
+      })
+    }
     handleSelectedItem(request.content)
     return
   }

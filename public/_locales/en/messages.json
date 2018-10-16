@@ -37,7 +37,7 @@
     "description": "keyword label in search list"
   },
   "contentScript_unavailable": {
-    "message": "You cannot open a popup on this page because of browser restrictions.",
+    "message": "Due to browser limitations, you won't be able to wake up Crown extensions on partially restricted pages or when pages are not loaded.",
     "description": "a tip when content-script is unavailable"
   },
   "isSetDefault": {

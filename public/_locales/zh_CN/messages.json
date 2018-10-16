@@ -37,7 +37,7 @@
     "description": "检索触发关键词在搜索列表中的标识"
   },
   "contentScript_unavailable": {
-    "message": "因为浏览器的限制, 您无法在改页面唤醒 Crown 扩展",
+    "message": "因为浏览器的限制, 您无法在 部分受限页面里 或者 网页未加载完成时 唤醒 Crown 扩展",
     "description": "content-script 不可用时的提示语"
   },
   "isSetDefault": {

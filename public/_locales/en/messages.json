@@ -59,5 +59,9 @@
         "example": "bookmarks"
       }
     }
+  },
+  "tip_notEmpty": {
+    "message": "This field is required !!!",
+    "description": "The tip which the field is not allowed to be empty"
   }
 }

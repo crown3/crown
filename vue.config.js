@@ -1,5 +1,10 @@
 const { resolve } = require('path')
 const ExtensionReload = require('webpack-chrome-extension-reloader')
+const GenerateJsonPlugin = require('generate-json-webpack-plugin')
+
+const isDev = process.env.NODE_ENV === 'development'
+
+process.env.VUE_APP_VERSION = require('./package.json').version
 
 module.exports = {
   pages: {
@@ -9,7 +14,6 @@ module.exports = {
   },
 
   // custom webpack config
-  productionSourceMap: !!process.env.HOT_RELOADING_ENABLED,
   filenameHashing: false,
 
   configureWebpack: {
@@ -19,7 +23,7 @@ module.exports = {
         cacheGroups: {
           vendors: {
             name: 'chunk-vendors',
-            test: /[\\\/]node_modules[\\\/].*js/,
+            test: /[\\\/]node_modules[\\\/].*js/, // eslint-disable-line no-useless-escape
             minChunks: 2,
             priority: -10,
             chunks: 'initial',
@@ -38,10 +42,23 @@ module.exports = {
   },
 
   chainWebpack: config => {
-    if (process.env.HOT_RELOADING_ENABLED) {
-      config.plugin('extension-hotreload').use(ExtensionReload)
+    if (isDev) {
+      config
+        .plugin('extension-hotreload')
+        .use(ExtensionReload, [{ reloadPage: true }])
     }
 
+    // generate manifest json
+    config
+      .plugin('generate-manifest')
+      .use(GenerateJsonPlugin, [
+        'manifest.json',
+        require('./src/genarate-manifest.ts'),
+        undefined,
+        isDev ? 2 : 0,
+      ])
+
+    // Don't generate content-script's html file
     config.plugins.delete('html-content-script').delete('html-background')
 
     config.resolve.alias

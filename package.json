@@ -1,51 +1,118 @@
 {
   "name": "crown--chrome_extension",
-  "version": "2.0.0-beta",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
+    "dev": "vue-cli-service build --watch --mode development",
     "build": "vue-cli-service build",
+    "analyze": "vue-cli-service build --report && opn ./dist/report.html",
     "lint": "vue-cli-service lint",
-    "preanalyze": "vue-cli-service build --report",
-    "analyze": "opn ./dist/report.html",
-    "dev": "vue-cli-service build --watch --mode reloading",
+    "test:unit": "vue-cli-service test:unit",
     "docs": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
   "dependencies": {
-    "material-design-icons-iconfont": "^3.0.3",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.2.5",
+    "vuetify": "^1.3.9",
     "vuex": "^3.0.1",
     "vuex-persistedstate": "^2.5.4",
-    "webextension-polyfill-ts": "^0.8.8"
+    "webextension-polyfill-ts": "^0.8.9"
   },
   "devDependencies": {
-    "@vue/cli-plugin-typescript": "^3.0.4",
-    "@vue/cli-service": "^3.0.4",
-    "image-webpack-loader": "^4.3.1",
+    "@types/jest": "^23.1.4",
+    "@vue/cli-plugin-babel": "^3.1.1",
+    "@vue/cli-plugin-eslint": "^3.1.5",
+    "@vue/cli-plugin-typescript": "^3.1.1",
+    "@vue/cli-plugin-unit-jest": "^3.1.1",
+    "@vue/cli-service": "^3.1.4",
+    "@vue/eslint-config-prettier": "^4.0.0",
+    "@vue/eslint-config-typescript": "^3.1.0",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0-0",
+    "generate-json-webpack-plugin": "^0.3.1",
+    "image-webpack-loader": "^4.5.0",
     "lint-staged": "^7.2.2",
-    "opn-cli": "^3.1.0",
+    "opn-cli": "^4.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "tslint-config-prettier": "^1.15.0",
+    "ts-jest": "^23.0.0",
     "typescript": "^3.0.0",
-    "vue-cli-plugin-vuetify": "^0.2.0",
     "vue-template-compiler": "^2.5.17",
-    "vuepress": "^0.14.4",
+    "vuepress": "^0.14.5",
     "webpack-chrome-extension-reloader": "^0.8.3"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "@vue/prettier",
+      "@vue/typescript"
+    ],
+    "rules": {
+      "prettier/prettier": [
+        "warn",
+        {
+          "singleQuote": true,
+          "semi": false,
+          "trailingComma": "es5"
+        }
+      ]
+    },
+    "parserOptions": {
+      "parser": "typescript-eslint-parser"
+    }
   },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
     }
   },
-  "browserslist": [ "Chrome >= 55" ],
+  "browserslist": [
+    "last 2 Chrome versions"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "vue",
+      "ts",
+      "tsx"
+    ],
+    "transform": {
+      "^.+\\.vue$": "vue-jest",
+      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "snapshotSerializers": [
+      "jest-serializer-vue"
+    ],
+    "testMatch": [
+      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
+    ],
+    "testURL": "http://localhost/"
+  },
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.ts": [ "vue-cli-service lint", "git add" ],
-    "*.vue": [ "vue-cli-service lint", "git add" ]
+    "*.js": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
   }
 }

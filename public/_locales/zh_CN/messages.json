@@ -51,13 +51,17 @@
     }
   },
   "keywordOfSet": {
-    "message": "用来触发单独搜索 $TYPE$ 的关键字",
-    "description": "单类搜索的触发关键字",
+    "message": "用来单独搜索 $TYPE$ 的关键词",
+    "description": "单独搜索的触发关键词",
     "placeholders": {
       "type": {
         "content": "$1",
         "example": "书签"
       }
     }
+  },
+  "tip_notEmpty": {
+    "message": "该字段不能为空哦 !!!",
+    "description": "表格字段不能为空的提示语"
   }
 }

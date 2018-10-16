@@ -60,7 +60,8 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+.env.local
+.env.*.local
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -204,5 +205,3 @@ fabric.properties
 # Custom rules (everything added below won't be overriden by 'Generate .gitignore File' if you use 'Update' option)
 
 /dist
-/dist-zip
-/.vscode

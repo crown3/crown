@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "module": "esnext",
     "strict": true,
     "jsx": "preserve",
@@ -10,13 +10,19 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
-    "types": [ "webpack-env", "vuetify" ],
+    "types": ["webpack-env", "jest", "vuetify"],
     "paths": {
-      "@/*": [ "src/*" ],
-      "@c/*": [ "src/components/*" ]
+      "@/*": ["src/*"],
+      "@c/*": ["src/components/*"]
     },
-    "lib": [ "esnext", "dom", "dom.iterable", "scripthost" ]
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
   },
-  "include": [ "src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx" ],
-  "exclude": [ "node_modules" ]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": ["node_modules"]
 }

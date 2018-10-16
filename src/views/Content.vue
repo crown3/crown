@@ -1,5 +1,5 @@
 <template>
-  <searchView isInContent :mainWidth="666"></searchView>
+  <searchView :mainWidth="666" isInContent></searchView>
 </template>
 
 <script lang="ts">

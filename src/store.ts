@@ -3,13 +3,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
-Vue.use(Vuex)
-
-interface ChangeItemConfigPayload {
+interface ChangeConfigPayload {
   type: 'bookmark' | 'tab' | 'RCT'
   key: 'isDefault' | 'keyword'
   value: string | boolean
 }
+
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
@@ -17,9 +17,13 @@ export default new Vuex.Store({
     config: defaultConfig,
   },
   mutations: {
-    changeItemConfig(state, payload: ChangeItemConfigPayload) {
-      state.config[payload.type][payload.key] = payload.value
+    changeItemConfig(state, { type, key, value }: ChangeConfigPayload) {
+      state.config[type][key] = value
     },
   },
-  plugins: [createPersistedState()],
+  plugins: [
+    createPersistedState({
+      key: process.env.VUE_APP_VERSION,
+    }),
+  ],
 })

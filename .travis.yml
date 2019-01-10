@@ -1,28 +1,36 @@
 sudo: required
 language: node_js
+
 node_js:
-  - "lts/*"
+  - 'lts/*'
+
 cache:
   yarn: true
   directories:
-    - "node_modules"
-branches:
-  only:
-    - master
-    - develop
+    - 'node_modules'
 
-before_install:
-  - curl -o- -L https://yarnpkg.com/install.sh | bash
-  - export PATH="$HOME/.yarn/bin:$PATH"
-script:
-  - yarn run lint
-before_deploy:
-  - yarn run docs:build
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
-  keep-history: true
-  local-dir: 'gh-pages'
-  on:
-    branch: master
+jobs:
+  include:
+    - stage: gh-pages
+      node_js: lts/*
+      script:
+        - yarn run lint
+      before_deploy:
+        - yarn run docs:build
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        local-dir: 'gh-pages'
+        on:
+          branch: master
+    - stage: semantic-release
+      node_js: lts/*
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npx semantic-release
+        on:
+          branch: master

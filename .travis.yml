@@ -27,6 +27,8 @@ jobs:
           branch: master
     - stage: semantic-release
       node_js: lts/*
+      script:
+        - yarn run lint
       deploy:
         provider: script
         skip_cleanup: true
